@@ -1,6 +1,7 @@
 class CreateDrones < ActiveRecord::Migration[7.1]
   def self.up
     create_table :drones do |t|
+      t.datetime :registration_date
       t.float :voltage
       t.float :current
       t.float :altitude

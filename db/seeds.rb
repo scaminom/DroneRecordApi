@@ -42,11 +42,12 @@ usuarios = [
 ]
 
 usuarios.each do |detalles|
-  User.create(detalles)
+  User.create!(detalles)
 end
 
 drones = [
   {
+    registration_date: Date.current,
     voltage: 12.5,
     current: 0.5,
     altitude: 100,
@@ -59,5 +60,21 @@ drones = [
 ]
 
 drones.each do |detalles|
-  Drone.create(detalles)
+  Drone.create!(detalles)
+end
+
+stations = [
+  {
+    registration_date: Date.current,
+    currentAC: 5.0,
+    voltage: 220.0,
+    currentDC: 0.5,
+    overall_consumption: 10.0,
+    consumptionTX: 5.0,
+    drone_id: 1
+  }
+]
+
+stations.each do |detalles|
+  Station.create(detalles)
 end
