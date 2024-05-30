@@ -44,3 +44,20 @@ usuarios = [
 usuarios.each do |detalles|
   User.create(detalles)
 end
+
+drones = [
+  {
+    voltage: 12.5,
+    current: 0.5,
+    altitude: 100,
+    speed: 30,
+    flight_mode: 'hover',
+    latitude: 40.73061,
+    longitude: -73.935242,
+    user_id: 1
+  }
+]
+
+drones.each do |detalles|
+  Drone.create(detalles)
+end
