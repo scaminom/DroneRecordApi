@@ -20,7 +20,7 @@ test:
 
 production:
   <<: *default
-  url:  <%= ENV['DATABASE_URL'] %>
-  database: drone-db-prod
-  username: postgres
-  password:  <%= ENV['RENDER_DEPLOY_DATABASE_PASSWORD'] %>
+  url:  postgres://uta_postgres:D7bfa1QFNg2vW1mobJ9O4JPHkOVs9eED@dpg-cpdv2vlds78s73eo3dj0-a.oregon-postgres.render.com/drones_db_c3wl
+  database: drones_db_c3wl
+  username: uta_postgres
+  password:  D7bfa1QFNg2vW1mobJ9O4JPHkOVs9eED

@@ -1,9 +1,9 @@
 class StationSerializer < Panko::Serializer
   attributes :id,
-             :registration_date,
-             :currentAC,
-             :voltage,
-             :currentDC,
-             :overall_consumption,
-             :consumptionTX
+             :fecha_registro,
+             :corrienteAC,
+             :voltajeDC,
+             :corrienteDC,
+             :consumo_general,
+             :consumoTX
 end

@@ -2,11 +2,12 @@ class Station < ApplicationRecord
   has_many :drones
 
   WHITELISTED_ATTRS = %i[
-    registration_date
-    currentAC
-    voltage
-    currentDC
-    overall_consumption
-    consumptionTX
+    fecha_registro
+    corrienteAC
+    voltajeDC
+    corrienteDC
+    consumo_general
+    consumoTX
+    drone_id
   ].freeze
 end

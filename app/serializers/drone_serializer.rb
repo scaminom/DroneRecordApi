@@ -1,11 +1,11 @@
 class DroneSerializer < Panko::Serializer
   attributes :id,
-             :registration_date,
-             :voltage,
-             :current,
-             :altitude,
-             :speed,
-             :flight_mode,
-             :latitude,
-             :longitude
+             :fecha_registro,
+             :voltaje,
+             :corriente,
+             :altitud,
+             :velocidad,
+             :modo_vuelo,
+             :latitud,
+             :longitud
 end

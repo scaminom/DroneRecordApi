@@ -10,8 +10,8 @@ class User < ApplicationRecord
     email
     password
     role
-    first_name
-    last_name
+    nombre
+    apellido
   ].freeze
 
   enum role: {

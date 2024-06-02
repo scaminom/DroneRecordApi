@@ -3,13 +3,14 @@ class Drone < ApplicationRecord
   # belongs_to :station
 
   WHITELISTED_ATTRIBUTES = %i[
-    regitration_date
-    voltage
-    current
-    altitude
-    speed
-    flight_mode
-    latitude
-    longitude
+    fecha_registro
+    voltaje
+    corriente
+    altitud
+    velocidad
+    modo_vuelo
+    latitud
+    longitud
+    user_id
   ].freeze
 end

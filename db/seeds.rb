@@ -4,40 +4,40 @@ usuarios = [
     password: 'contraseña1',
     email: 'usuario1@example.com',
     role: 'admin',
-    first_name: 'Juan',
-    last_name: 'Gómez'
+    nombre: 'Juan',
+    apellido: 'Gómez'
   },
   {
     username: 'usuario2',
     password: 'contraseña2',
     email: 'usuario2@example.com',
     role: 'admin',
-    first_name: 'María',
-    last_name: 'Rodríguez'
+    nombre: 'María',
+    apellido: 'Rodríguez'
   },
   {
     username: 'usuario3',
     password: 'contraseña3',
     email: 'usuario3@example.com',
     role: 'admin',
-    first_name: 'Carlos',
-    last_name: 'López'
+    nombre: 'Carlos',
+    apellido: 'López'
   },
   {
     username: 'usuario4',
     password: 'contraseña4',
     email: 'usuario4@example.com',
     role: 'user',
-    first_name: 'Ana',
-    last_name: 'Martínez'
+    nombre: 'Ana',
+    apellido: 'Martínez'
   },
   {
     username: 'usuario5',
     password: 'contraseña5',
     email: 'usuario5@example.com',
     role: 'user',
-    first_name: 'Pedro',
-    last_name: 'Sánchez'
+    nombre: 'Pedro',
+    apellido: 'Sánchez'
   }
 ]
 
@@ -47,14 +47,14 @@ end
 
 drones = [
   {
-    registration_date: Date.current,
-    voltage: 12.5,
-    current: 0.5,
-    altitude: 100,
-    speed: 30,
-    flight_mode: 'hover',
-    latitude: 40.73061,
-    longitude: -73.935242,
+    fecha_registro: Date.current,
+    voltaje: 12.5,
+    corriente: 0.5,
+    altitud: 100,
+    velocidad: 30,
+    modo_vuelo: 'hover',
+    latitud: 40.73061,
+    longitud: -73.935242,
     user_id: 1
   }
 ]
@@ -65,12 +65,12 @@ end
 
 stations = [
   {
-    registration_date: Date.current,
-    currentAC: 5.0,
-    voltage: 220.0,
-    currentDC: 0.5,
-    overall_consumption: 10.0,
-    consumptionTX: 5.0,
+    fecha_registro: Date.current,
+    corrienteAC: 5.0,
+    voltajeDC: 220.0,
+    corrienteDC: 0.5,
+    consumo_general: 10.0,
+    consumoTX: 5.0,
     drone_id: 1
   }
 ]
