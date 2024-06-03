@@ -40,10 +40,25 @@ class StationsController < ApplicationController
     end
   end
 
+  def show_station_info
+    date, start_time, end_time = info_params.values_at(:date, :start_time, :end_time)
+
+    station_info_service = StationInfoService.new(date, start_time, end_time)
+    stations = station_info_service.call
+
+    render json: Panko::ArraySerializer.new(
+      stations, each_serializer: StationSerializer
+    ).to_json
+  end
+
   private
 
   def set_station
     @station = Station.find(params[:id])
+  end
+
+  def info_params
+    params.permit(:date, :start_time, :end_time)
   end
 
   def station_params

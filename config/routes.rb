@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :stations
   devise_for :users,
              path: 'auth', path_names: {
                              sign_in: 'login',
@@ -13,6 +12,9 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show create update]
   resources :drones
+  resources :stations
+
+  get 'show_station_info', to: 'stations#show_station_info'
 
   match '*unmatched', to: 'application#no_route_found', via: :all
 end
