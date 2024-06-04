@@ -1,6 +1,7 @@
 class Drone < ApplicationRecord
   belongs_to :user
   # belongs_to :station
+  has_one :solar_panel
 
   WHITELISTED_ATTRIBUTES = %i[
     fecha_registro

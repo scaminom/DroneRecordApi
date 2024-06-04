@@ -1,80 +1,60 @@
-usuarios = [
-  {
-    username: 'usuario1',
-    password: 'contraseña1',
-    email: 'usuario1@example.com',
-    role: 'admin',
-    nombre: 'Juan',
-    apellido: 'Gómez'
-  },
-  {
-    username: 'usuario2',
-    password: 'contraseña2',
-    email: 'usuario2@example.com',
-    role: 'admin',
-    nombre: 'María',
-    apellido: 'Rodríguez'
-  },
-  {
-    username: 'usuario3',
-    password: 'contraseña3',
-    email: 'usuario3@example.com',
-    role: 'admin',
-    nombre: 'Carlos',
-    apellido: 'López'
-  },
-  {
-    username: 'usuario4',
-    password: 'contraseña4',
-    email: 'usuario4@example.com',
-    role: 'user',
-    nombre: 'Ana',
-    apellido: 'Martínez'
-  },
-  {
-    username: 'usuario5',
-    password: 'contraseña5',
-    email: 'usuario5@example.com',
-    role: 'user',
-    nombre: 'Pedro',
-    apellido: 'Sánchez'
-  }
-]
+require 'faker'
 
-usuarios.each do |detalles|
-  User.create!(detalles)
+# Faker data for users
+100.times do
+  user_data = {
+    username: Faker::Internet.unique.username(specifier: 5..10),
+    password: Faker::Internet.password,
+    email: Faker::Internet.unique.email,
+    role: %w[admin user].sample,
+    nombre: Faker::Name.first_name,
+    apellido: Faker::Name.last_name
+  }
+  User.create!(user_data)
 end
 
-drones = [
-  {
-    fecha_registro: Date.current,
-    voltaje: 12.5,
-    corriente: 0.5,
-    altitud: 100,
-    velocidad: 30,
-    modo_vuelo: 'hover',
-    latitud: 40.73061,
-    longitud: -73.935242,
-    user_id: 1
+# Faker data for drones
+100.times do
+  drone_data = {
+    fecha_registro: Faker::Time.between(from: 1.year.ago, to: Date.today, format: :default),
+    voltaje: Faker::Number.decimal(l_digits: 2),
+    corriente: Faker::Number.decimal(l_digits: 1),
+    altitud: Faker::Number.between(from: 50, to: 200),
+    velocidad: Faker::Number.between(from: 20, to: 50),
+    modo_vuelo: %w[hover manual auto].sample,
+    latitud: Faker::Address.latitude,
+    longitud: Faker::Address.longitude,
+    user_id: User.pluck(:id).sample
   }
-]
-
-drones.each do |detalles|
-  Drone.create!(detalles)
+  Drone.create!(drone_data)
 end
 
-stations = [
-  {
-    fecha_registro: Date.current,
-    corrienteAC: 5.0,
-    voltajeDC: 220.0,
-    corrienteDC: 0.5,
-    consumo_general: 10.0,
-    consumoTX: 5.0,
-    drone_id: 1
+# Faker data for stations
+100.times do
+  station_data = {
+    fecha_registro: Faker::Time.between(from: 1.year.ago, to: Date.today, format: :default),
+    corrienteAC: Faker::Number.decimal(l_digits: 1),
+    voltajeDC: Faker::Number.decimal(l_digits: 3),
+    corrienteDC: Faker::Number.decimal(l_digits: 1),
+    consumo_general: Faker::Number.decimal(l_digits: 2),
+    consumoTX: Faker::Number.decimal(l_digits: 1),
+    drone_id: Drone.pluck(:id).sample
   }
-]
-
-stations.each do |detalles|
-  Station.create(detalles)
+  Station.create!(station_data)
 end
+
+# Faker data for solar panels
+500.times do
+  solar_panel_data = {
+    fecha_registro: Faker::Time.between(from: 8.years.ago, to: Date.today, format: :default),
+    vPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+    cPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+    vBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+    cBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+    vCar: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+    cCar: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+    drone_id: Drone.pluck(:id).sample
+  }
+  SolarPanel.create!(solar_panel_data)
+end
+

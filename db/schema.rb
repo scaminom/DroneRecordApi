@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_30_040645) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_013807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_040645) do
     t.float "longitud"
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_drones_on_user_id"
+  end
+
+  create_table "solar_panels", force: :cascade do |t|
+    t.datetime "fecha_registro"
+    t.float "vPan"
+    t.float "cPan"
+    t.float "vBat"
+    t.float "cBat"
+    t.float "vCar"
+    t.float "cCar"
+    t.bigint "drone_id", null: false
+    t.index ["drone_id"], name: "index_solar_panels_on_drone_id"
   end
 
   create_table "stations", force: :cascade do |t|
@@ -52,5 +64,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_040645) do
   end
 
   add_foreign_key "drones", "users"
+  add_foreign_key "solar_panels", "drones"
   add_foreign_key "stations", "drones"
 end
