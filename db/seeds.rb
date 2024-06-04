@@ -44,19 +44,23 @@ end
 end
 
 # Faker data for solar panels
-500.times do
-  random_date = Faker::Date.between(from: 8.years.ago, to: Date.today)
-  random_time = Faker::Time.between_dates(from: random_date, to: random_date + 1.day, format: :default)
-  
-  solar_panel_data = { 
-    fecha_registro: random_time,
-    vPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
-    cPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
-    vBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
-    cBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
-    vCar: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
-    cCar: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
-    drone_id: Drone.pluck(:id).sample
-  }
-  SolarPanel.create!(solar_panel_data)
+start_date = 8.years.ago.to_date
+end_date = Date.today
+
+(start_date..end_date).each do |date|
+  (0..12).each do |interval|
+    random_time = date.to_time + (interval * 15.minutes)
+
+    solar_panel_data = {
+      fecha_registro: random_time,
+      vPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+      cPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+      vBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+      cBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+      vCar: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+      cCar: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
+      drone_id: Drone.pluck(:id).sample
+    }
+    SolarPanel.create!(solar_panel_data)
+  end
 end
