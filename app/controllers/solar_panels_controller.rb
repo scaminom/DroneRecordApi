@@ -39,10 +39,25 @@ class SolarPanelsController < ApplicationController
     end
   end
 
+  def show_solar_panel_info
+    date, start_time, end_time = info_params.values_at(:date, :start_time, :end_time)
+
+    solar_panel_info_service = SolarPanelInfoService.new(date, start_time, end_time)
+    solar_panels = solar_panel_info_service.call
+
+    render json: Panko::ArraySerializer.new(
+      solar_panels, each_serializer: SolarPanelSerializer
+    ).to_json
+  end
+
   private
 
   def set_solar_panel
     @solar_panel = SolarPanel.find(params[:id])
+  end
+
+  def info_params
+    params.permit(:date, :start_time, :end_time)
   end
 
   def solar_panel_params

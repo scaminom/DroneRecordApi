@@ -45,8 +45,11 @@ end
 
 # Faker data for solar panels
 500.times do
-  solar_panel_data = {
-    fecha_registro: Faker::Time.between(from: 8.years.ago, to: Date.today, format: :default),
+  random_date = Faker::Date.between(from: 8.years.ago, to: Date.today)
+  random_time = Faker::Time.between_dates(from: random_date, to: random_date + 1.day, format: :default)
+  
+  solar_panel_data = { 
+    fecha_registro: random_time,
     vPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
     cPan: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
     vBat: Faker::Number.decimal(l_digits: (2..3).to_a.sample, r_digits: (1..3).to_a.sample),
@@ -57,4 +60,3 @@ end
   }
   SolarPanel.create!(solar_panel_data)
 end
-

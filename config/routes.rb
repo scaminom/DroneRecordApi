@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :solar_panels
 
   get 'show_station_info', to: 'stations#show_station_info'
+  get 'show_solar_panel_info', to: 'solar_panels#show_solar_panel_info'
 
   match '*unmatched', to: 'application#no_route_found', via: :all
 end
