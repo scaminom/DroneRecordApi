@@ -12,11 +12,22 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show create update]
   resources :drones
-  resources :stations
-  resources :solar_panels
+  resources :stations do
+    collection do
+      get 'show_station_info'
+    end
+  end
 
-  get 'show_station_info', to: 'stations#show_station_info'
-  get 'show_solar_panel_info', to: 'solar_panels#show_solar_panel_info'
+  resources :solar_panels do
+    collection do
+      get 'filter_by_week', to: 'solar_panels#index', defaults: { filter_type: :week }
+      get 'filter_by_month', to: 'solar_panels#index', defaults: { filter_type: :month }
+      get 'filter_by_day', to: 'solar_panels#index', defaults: { filter_type: :day }
+      get 'current', to: 'solar_panels#index', defaults: { filter_type: :current }
+      get 'show_solar_panel_info'
+    end
+  end
 
   match '*unmatched', to: 'application#no_route_found', via: :all
 end
+

@@ -1,24 +1,21 @@
-# README
+Filter by Week
+Method: GET
+URL: http://localhost:3000/solar_panels/filter_by_week
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Filter by Month
+Method: GET
+URL: http://localhost:3000/solar_panels/filter_by_month
 
-Things you may want to cover:
+Filter by Day
+Method: GET
+URL: http://localhost:3000/solar_panels/filter_by_day?start_date=2024-06-01&end_date=2024-06-09
 
-* Ruby version
+Current
+Method: GET
+URL: http://localhost:3000/solar_panels/current
 
-* System dependencies
+First Date:
+'fecha_registro: Sat, 25 May 2024 13:51:06.000000000 UTC +00:00'
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Last Date:
+'fecha_registro: Mon, 27 May 2024 01:20:36.000000000 UTC +00:00'

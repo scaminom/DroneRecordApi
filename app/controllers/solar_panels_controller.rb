@@ -3,6 +3,13 @@ class SolarPanelsController < ApplicationController
 
   def index
     solar_panels = SolarPanel.all
+    filter_type = params[:filter_type]&.to_sym
+    filter_params = params.slice(:start_date, :end_date)
+
+    if filter_type.present?
+      context = FilteringContext.new(solar_panels, filter_type, filter_params)
+      solar_panels = context.filter
+    end
 
     render json: Panko::ArraySerializer.new(
       solar_panels, each_serializer: SolarPanelSerializer
