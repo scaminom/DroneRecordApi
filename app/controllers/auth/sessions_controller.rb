@@ -11,7 +11,7 @@ class Auth::SessionsController < Devise::SessionsController
         code: 200, message: 'Logged in successfully.',
         data: { user: UserSerializer.new.serialize(current_user) }
       }
-    }, status: :ok
+    }
   end
 
   def respond_to_on_destroy
@@ -25,12 +25,12 @@ class Auth::SessionsController < Devise::SessionsController
       render json: {
         status: 200,
         message: 'Logged out successfully.'
-      }, status: :ok
+      }
     else
       render json: {
         status: 401,
         message: "Couldn't find an active session."
-      }, status: :unauthorized
+      }
     end
   end
 end
