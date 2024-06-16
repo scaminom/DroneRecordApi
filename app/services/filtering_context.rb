@@ -1,4 +1,3 @@
-# app/services/filtering_context.rb
 class FilteringContext
   def initialize(records, filter_type, params = {})
     @records = records
@@ -27,4 +26,3 @@ class FilteringContext
     end
   end
 end
-

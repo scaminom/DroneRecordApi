@@ -10,44 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_013807) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_015040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "drones", force: :cascade do |t|
-    t.datetime "fecha_registro"
-    t.float "voltaje"
-    t.float "corriente"
-    t.float "altitud"
-    t.float "velocidad"
-    t.string "modo_vuelo"
-    t.float "latitud"
-    t.float "longitud"
+  create_table "datos_uavs", force: :cascade do |t|
+    t.datetime "fecha_registro", null: false
+    t.float "voltaje", null: false
+    t.float "porcentaje_bateria", null: false
+    t.float "corriente", null: false
+    t.string "modo_vuelo", null: false
+    t.float "velocidad", null: false
+    t.float "altitud", null: false
+    t.float "latitud", null: false
+    t.float "longitud", null: false
+    t.bigint "uav_id", null: false
+    t.index ["uav_id"], name: "index_datos_uavs_on_uav_id"
+  end
+
+  create_table "estaciones_carga_ac", force: :cascade do |t|
+    t.datetime "fecha_registro", null: false
+    t.float "corrienteAC", null: false
+    t.float "potenciaAC", null: false
+    t.bigint "uav_id", null: false
+    t.index ["uav_id"], name: "index_estaciones_carga_ac_on_uav_id"
+  end
+
+  create_table "estaciones_carga_dc", force: :cascade do |t|
+    t.datetime "fecha_registro", null: false
+    t.float "corrienteDC", null: false
+    t.float "potenciaDC", null: false
+    t.bigint "uav_id", null: false
+    t.index ["uav_id"], name: "index_estaciones_carga_dc_on_uav_id"
+  end
+
+  create_table "paneles_solares", force: :cascade do |t|
+    t.datetime "fecha_registro", null: false
+    t.float "Vp", null: false
+    t.float "Cp", null: false
+    t.float "Vb", null: false
+    t.float "Cb", null: false
+    t.float "Vc", null: false
+    t.float "Cc", null: false
+    t.bigint "uav_id", null: false
+    t.index ["uav_id"], name: "index_paneles_solares_on_uav_id"
+  end
+
+  create_table "uavs", force: :cascade do |t|
+    t.integer "tipo_dron"
+    t.float "capacidad_bateria"
+    t.integer "tipo_placa"
+    t.float "max_viento_vuelo"
     t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_drones_on_user_id"
-  end
-
-  create_table "solar_panels", force: :cascade do |t|
-    t.datetime "fecha_registro"
-    t.float "vPan"
-    t.float "cPan"
-    t.float "vBat"
-    t.float "cBat"
-    t.float "vCar"
-    t.float "cCar"
-    t.bigint "drone_id", null: false
-    t.index ["drone_id"], name: "index_solar_panels_on_drone_id"
-  end
-
-  create_table "stations", force: :cascade do |t|
-    t.datetime "fecha_registro"
-    t.float "corrienteAC"
-    t.float "voltajeDC"
-    t.float "corrienteDC"
-    t.float "consumo_general"
-    t.float "consumoTX"
-    t.bigint "drone_id", null: false
-    t.index ["drone_id"], name: "index_stations_on_drone_id"
+    t.index ["user_id"], name: "index_uavs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,7 +78,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_013807) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "drones", "users"
-  add_foreign_key "solar_panels", "drones"
-  add_foreign_key "stations", "drones"
+  add_foreign_key "datos_uavs", "uavs"
+  add_foreign_key "estaciones_carga_ac", "uavs"
+  add_foreign_key "estaciones_carga_dc", "uavs"
+  add_foreign_key "paneles_solares", "uavs"
+  add_foreign_key "uavs", "users"
 end
