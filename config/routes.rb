@@ -10,6 +10,8 @@ Rails.application.routes.draw do
                registrations: 'auth/registrations'
              }
 
+  resources :users, only: :index
+
   resources :solar_panels, only: [:index] do
     collection do
       get 'filter_by_week(/:uav_id)', to: 'solar_panels#index', defaults: { filter_type: :week }, as: :filter_by_week
@@ -64,4 +66,3 @@ Rails.application.routes.draw do
 
   match '*unmatched', to: 'application#no_route_found', via: :all
 end
-
