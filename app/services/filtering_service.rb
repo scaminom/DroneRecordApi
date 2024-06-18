@@ -15,7 +15,7 @@ module FilteringService
       uav_id = @params[:uav_id]
       return records unless uav_id
 
-      records.where(uav_id: uav_id)
+      records.where(uav_id:)
     end
   end
 
@@ -46,6 +46,18 @@ module FilteringService
   class CurrentFilter < Base
     def filter
       filter_by_uav_id(@records).order(fecha_registro: :desc).limit(5)
+    end
+  end
+
+  class PersonalizedFilter < Base
+    def filter
+      date = Date.parse(@params[:date])
+      start_time = @params[:start_time]
+      end_time = @params[:end_time]
+
+      start_datetime = DateTime.parse("#{date} #{start_time}")
+      end_datetime = DateTime.parse("#{date} #{end_time}")
+      filter_by_uav_id(@records).where(fecha_registro: start_datetime..end_datetime)
     end
   end
 end

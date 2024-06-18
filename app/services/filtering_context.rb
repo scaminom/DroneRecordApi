@@ -21,6 +21,8 @@ class FilteringContext
       FilteringService::DayFilter
     when :current
       FilteringService::CurrentFilter
+    when :personalized
+      FilteringService::PersonalizedFilter
     else
       raise 'Unknown filter type'
     end

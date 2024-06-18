@@ -5,7 +5,8 @@ class EstacionCargaAcsController < ApplicationController
     datos_estacion_carga_ac = EstacionCargaAc.all
     filter_type = params[:filter_type]&.to_sym
     raise ArgumentError, 'UAV ID is required' unless params[:uav_id]
-    filter_params = params.slice(:start_date, :end_date).merge(uav_id: params[:uav_id])
+
+    filter_params = params.slice(:start_date, :end_date, :date, :start_time, :end_time).merge(uav_id: params[:uav_id])
 
     if filter_type.present?
       context = FilteringContext.new(datos_estacion_carga_ac, filter_type, filter_params)

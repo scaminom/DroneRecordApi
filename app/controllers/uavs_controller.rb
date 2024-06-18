@@ -4,10 +4,10 @@ class UavsController < ApplicationController
   def index
     @uavs = Uav.all
 
-    # render json: Panko::ArraySerializer.new(
-    #   @uavs, each_serializer: UavSerializer
-    # ).to_json
-    render json: @uavs
+    render json: Panko::ArraySerializer.new(
+      @uavs, each_serializer: UavSerializer
+    ).to_json
+    # render json: @uavs
   end
 
   def show

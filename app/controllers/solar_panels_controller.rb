@@ -5,7 +5,8 @@ class SolarPanelsController < ApplicationController
     solar_panels = PanelSolar.all
     filter_type = params[:filter_type]&.to_sym
     raise ArgumentError, 'UAV ID is required' unless params[:uav_id]
-    filter_params = params.slice(:start_date, :end_date).merge(uav_id: params[:uav_id])
+
+    filter_params = params.slice(:start_date, :end_date, :date, :start_time, :end_time).merge(uav_id: params[:uav_id])
 
     if filter_type.present?
       context = FilteringContext.new(solar_panels, filter_type, filter_params)
@@ -45,17 +46,6 @@ class SolarPanelsController < ApplicationController
     else
       render json: { errors: @solar_panel.errors.full_messages }, status: :unprocessable_entity
     end
-  end
-
-  def show_solar_panel_info
-    date, start_time, end_time = info_params.values_at(:date, :start_time, :end_time)
-
-    solar_panel_info_service = PanelSolarInfoService.new(date, start_time, end_time)
-    solar_panels = solar_panel_info_service.call
-
-    render json: Panko::ArraySerializer.new(
-      solar_panels, each_serializer: PanelSolarSerializer
-    ).to_json
   end
 
   private
