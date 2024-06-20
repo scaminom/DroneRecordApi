@@ -10,10 +10,22 @@ class EstacionCargaDcsController < ApplicationController
 
     if filter_type.present?
       context = FilteringContext.new(datos_estacion_carga_dc, filter_type, filter_params)
-      datos_estacion_carga_dc = context.filter
+      pagy, datos_estacion_carga_dc = pagy(context.filter)
     end
 
-    render json: datos_estacion_carga_dc
+    response = {
+      data: datos_estacion_carga_dc,
+      pagination: {
+        count: pagy.count,
+        page: pagy.page,
+        items: pagy.items,
+        pages: pagy.pages,
+        next: pagy.next,
+        prev: pagy.prev
+      }
+    }
+
+    render json: response
   end
 
   def show

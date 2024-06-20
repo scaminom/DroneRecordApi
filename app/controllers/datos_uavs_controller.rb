@@ -10,10 +10,22 @@ class DatosUavsController < ApplicationController
 
     if filter_type.present?
       context = FilteringContext.new(datos_uav, filter_type, filter_params)
-      datos_uav = context.filter
+      pagy, datos_uav = pagy(context.filter)
     end
 
-    render json: datos_uav
+    response = {
+      data: datos_uav,
+      pagination: {
+        count: pagy.count,
+        page: pagy.page,
+        items: pagy.items,
+        pages: pagy.pages,
+        next: pagy.next,
+        prev: pagy.prev
+      }
+    }
+
+    render json: response
   end
 
   def show
@@ -53,4 +65,3 @@ class DatosUavsController < ApplicationController
                                       :velocidad, :altitud, :latitud, :longitud, :uav_id)
   end
 end
-

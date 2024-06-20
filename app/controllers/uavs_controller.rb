@@ -2,12 +2,21 @@ class UavsController < ApplicationController
   before_action :set_uav, only: %i[show update destroy]
 
   def index
-    @uavs = Uav.all
+    pagy, @uavs = pagy(Uav.all)
 
-    render json: Panko::ArraySerializer.new(
-      @uavs, each_serializer: UavSerializer
-    ).to_json
-    # render json: @uavs
+    response = {
+      data: Panko::ArraySerializer.new(@uavs, each_serializer: UavSerializer),
+      pagination: {
+        count: pagy.count,
+        page: pagy.page,
+        items: pagy.items,
+        pages: pagy.pages,
+        next: pagy.next,
+        prev: pagy.prev
+      }
+    }
+
+    render json: response
   end
 
   def show

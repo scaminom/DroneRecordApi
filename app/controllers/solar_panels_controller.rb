@@ -10,12 +10,22 @@ class SolarPanelsController < ApplicationController
 
     if filter_type.present?
       context = FilteringContext.new(solar_panels, filter_type, filter_params)
-      solar_panels = context.filter
+      pagy, solar_panels = pagy(context.filter)
     end
 
-    render json: Panko::ArraySerializer.new(
-      solar_panels, each_serializer: SolarPanelSerializer
-    ).to_json
+    response = {
+      data: solar_panels,
+      pagination: {
+        count: pagy.count,
+        page: pagy.page,
+        items: pagy.items,
+        pages: pagy.pages,
+        next: pagy.next,
+        prev: pagy.prev
+      }
+    }
+
+    render json: response
   end
 
   def show

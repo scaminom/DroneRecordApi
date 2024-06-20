@@ -24,6 +24,8 @@ gem 'rack-cors'
 
 gem 'faker'
 
+gem 'pagy'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
 end
