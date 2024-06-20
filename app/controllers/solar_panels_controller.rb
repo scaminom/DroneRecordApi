@@ -8,7 +8,12 @@ class SolarPanelsController < ApplicationController
 
     filter_params = params.slice(:start_date, :end_date, :date, :start_time, :end_time).merge(uav_id: params[:uav_id])
 
-    if filter_type.present?
+    if filter_type == :current
+      context = FilteringContext.new(solar_panels, filter_type, filter_params)
+      pagy, solar_panels = pagy(context.filter, items: 5)
+    end
+
+    if filter_type.present? && filter_type != :current
       context = FilteringContext.new(solar_panels, filter_type, filter_params)
       pagy, solar_panels = pagy(context.filter)
     end
