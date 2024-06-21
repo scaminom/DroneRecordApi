@@ -57,6 +57,6 @@ class UavsController < ApplicationController
   end
 
   def uav_params
-    params.require(:uav).permit(:tipo_dron, :capacidad_bateria, :tipo_placa, :max_viento_vuelo, :user_id)
+    params.require(:uav).permit(:nombre, :descripcion, :numero_serie, :tipo_dron, :capacidad_bateria, :tipo_placa, :max_viento_vuelo, :user_id)
   end
 end

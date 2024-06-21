@@ -1,1 +1,1 @@
-Pagy::DEFAULT[:items] = 15
+Pagy::DEFAULT[:items] = 7
