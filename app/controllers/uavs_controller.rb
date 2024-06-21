@@ -2,10 +2,14 @@ class UavsController < ApplicationController
   before_action :set_uav, only: %i[show update destroy]
 
   def index
-    pagy, @uavs = pagy(Uav.all)
+    pagy, uavs = pagy(Uav.all)
+
+    serializerd_uavs = uavs.map do |uav|
+      UavSerializer.new.serialize(uav)
+    end
 
     response = {
-      data: Panko::ArraySerializer.new(@uavs, each_serializer: UavSerializer),
+      data: serializerd_uavs,
       pagination: {
         count: pagy.count,
         page: pagy.page,

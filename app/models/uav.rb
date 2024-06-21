@@ -6,5 +6,5 @@ class Uav < ApplicationRecord
   has_many :datos_uav
 
   enum tipo_dron: { multirotor: 0, ala_fija: 1 }
-  enum tipo_placa: { monocristalina: 0, policristalina: 1, flexible: 2 }
+  enum tipo_placa: { arduino: 0, berrypi: 1 }
 end

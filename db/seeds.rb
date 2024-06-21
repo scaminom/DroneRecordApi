@@ -24,6 +24,9 @@ end
 
 3.times do
   Uav.create(
+    nombre: Faker::Drone.name,
+    descripcion: Faker::Lorem.sentence,
+    numero_serie: Faker::Alphanumeric.alphanumeric(number: 10).upcase,
     tipo_dron: Uav.tipo_drons.keys.sample,
     capacidad_bateria: Faker::Number.between(from: 20.0, to: 100.0).round(2),
     tipo_placa: Uav.tipo_placas.keys.sample,
@@ -31,7 +34,6 @@ end
     user_id: User.pluck(:id).sample
   )
 end
-
 
 uavs_data = [ 
   { fecha_registro: '2024-06-10 11:07:55', voltaje: 11.087, porcentaje_bateria: 0 },
