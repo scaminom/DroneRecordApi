@@ -23,15 +23,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :datos_uavs, only: [:index] do
-    collection do
-      get 'filter_by_week(/:uav_id)', to: 'datos_uavs#index', defaults: { filter_type: :week }, as: :filter_by_week
-      get 'filter_by_month(/:uav_id)', to: 'datos_uavs#index', defaults: { filter_type: :month }, as: :filter_by_month
-      get 'filter_by_day(/:uav_id)', to: 'datos_uavs#index', defaults: { filter_type: :day }, as: :filter_by_day
-      get 'current(/:uav_id)', to: 'datos_uavs#index', defaults: { filter_type: :current }, as: :current_datos_uavs
-      get 'personalized_info(/:uav_id)', to: 'datos_uavs#index', defaults: { filter_type: :personalized },
-                                         as: :personalized_info
-    end
+  namespace :uav_data, path: 'datos_uavs', as: :datos_uavs do
+    get '/', to: 'datos_uavs#index'
+    get 'filter_by_week(/:uav_id)', to: 'week_filtering#index'
+    get 'filter_by_month(/:uav_id)', to: 'month_filtering#index'
+    get 'filter_by_day(/:uav_id)', to: 'day_filtering#index'
+    get 'current(/:uav_id)', to: 'current_filtering#index'
+    get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
   resources :estacion_carga_dcs, only: [:index] do
