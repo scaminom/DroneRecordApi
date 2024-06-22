@@ -14,6 +14,14 @@ class User < ApplicationRecord
     apellido
   ].freeze
 
+  WHITELISTED_ATTRIBUTES_REGISTRATION = %i[
+    username
+    email
+    password
+    nombre
+    apellido
+  ].freeze
+
   enum role: {
     'user': 0,
     'admin': 1

@@ -12,15 +12,13 @@ Rails.application.routes.draw do
 
   resources :users, only: :index
 
-  resources :solar_panels, only: [:index] do
-    collection do
-      get 'filter_by_week(/:uav_id)', to: 'solar_panels#index', defaults: { filter_type: :week }, as: :filter_by_week
-      get 'filter_by_month(/:uav_id)', to: 'solar_panels#index', defaults: { filter_type: :month }, as: :filter_by_month
-      get 'filter_by_day(/:uav_id)', to: 'solar_panels#index', defaults: { filter_type: :day }, as: :filter_by_day
-      get 'current(/:uav_id)', to: 'solar_panels#index', defaults: { filter_type: :current }, as: :current_solar_panels
-      get 'personalized_info(/:uav_id)', to: 'solar_panels#index', defaults: { filter_type: :personalized },
-                                         as: :personalized_info
-    end
+  namespace :solar_panel, path: 'solar_panels', as: :solar_panels do
+    get '/', to: 'solar_panels#index'
+    get 'filter_by_week(/:uav_id)', to: 'week_filtering#index'
+    get 'filter_by_month(/:uav_id)', to: 'month_filtering#index'
+    get 'filter_by_day(/:uav_id)', to: 'day_filtering#index'
+    get 'current(/:uav_id)', to: 'current_filtering#index'
+    get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
   namespace :uav_data, path: 'datos_uavs', as: :datos_uavs do
@@ -32,32 +30,22 @@ Rails.application.routes.draw do
     get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
-  resources :estacion_carga_dcs, only: [:index] do
-    collection do
-      get 'filter_by_week(/:uav_id)', to: 'estacion_carga_dcs#index', defaults: { filter_type: :week },
-                                      as: :filter_by_week
-      get 'filter_by_month(/:uav_id)', to: 'estacion_carga_dcs#index', defaults: { filter_type: :month },
-                                       as: :filter_by_month
-      get 'filter_by_day(/:uav_id)', to: 'estacion_carga_dcs#index', defaults: { filter_type: :day }, as: :filter_by_day
-      get 'current(/:uav_id)', to: 'estacion_carga_dcs#index', defaults: { filter_type: :current },
-                               as: :current_estacion_carga_dcs
-      get 'personalized_info(/:uav_id)', to: 'estacion_carga_dcs#index', defaults: { filter_type: :personalized },
-                                         as: :personalized_info
-    end
+  namespace :charge_station_ac, path: 'estacion_carga_acs', as: :estacion_carga_acs do
+    get '/', to: 'estacion_carga_acs#index'
+    get 'filter_by_week(/:uav_id)', to: 'week_filtering#index'
+    get 'filter_by_month(/:uav_id)', to: 'month_filtering#index'
+    get 'filter_by_day(/:uav_id)', to: 'day_filtering#index'
+    get 'current(/:uav_id)', to: 'current_filtering#index'
+    get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
-  resources :estacion_carga_acs, only: [:index] do
-    collection do
-      get 'filter_by_week(/:uav_id)', to: 'estacion_carga_acs#index', defaults: { filter_type: :week },
-                                      as: :filter_by_week
-      get 'filter_by_month(/:uav_id)', to: 'estacion_carga_acs#index', defaults: { filter_type: :month },
-                                       as: :filter_by_month
-      get 'filter_by_day(/:uav_id)', to: 'estacion_carga_acs#index', defaults: { filter_type: :day }, as: :filter_by_day
-      get 'current(/:uav_id)', to: 'estacion_carga_acs#index', defaults: { filter_type: :current },
-                               as: :current_estacion_carga_acs
-      get 'personalized_info(/:uav_id)', to: 'estacion_carga_acs#index', defaults: { filter_type: :personalized },
-                                         as: :personalized_info
-    end
+  namespace :charge_station_dc, path: 'estacion_carga_dcs', as: :estacion_carga_dcs do
+    get '/', to: 'estacion_carga_dcs#index'
+    get 'filter_by_week(/:uav_id)', to: 'week_filtering#index'
+    get 'filter_by_month(/:uav_id)', to: 'month_filtering#index'
+    get 'filter_by_day(/:uav_id)', to: 'day_filtering#index'
+    get 'current(/:uav_id)', to: 'current_filtering#index'
+    get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
   resources :uavs

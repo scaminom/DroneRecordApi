@@ -8,7 +8,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   private
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: User::WHITELISTED_ATTRIBUTES)
+    devise_parameter_sanitizer.permit(:sign_up, keys: User::WHITELISTED_ATTRIBUTES_REGISTRATION)
   end
 
   def respond_with(resource, _options = {})

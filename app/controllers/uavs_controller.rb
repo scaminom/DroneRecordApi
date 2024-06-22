@@ -2,7 +2,9 @@ class UavsController < ApplicationController
   before_action :set_uav, only: %i[show update destroy]
 
   def index
-    pagy, uavs = pagy(Uav.where(user_id: current_user))
+    pagy, uavs = pagy(Uav.all) if current_user.admin?
+
+    pagy, uavs = pagy(Uav.where(user_id: current_user)) if current_user.user?
 
     serializerd_uavs = uavs.map do |uav|
       UavSerializer.new.serialize(uav)
@@ -10,14 +12,7 @@ class UavsController < ApplicationController
 
     response = {
       data: serializerd_uavs,
-      pagination: {
-        count: pagy.count,
-        page: pagy.page,
-        items: pagy.items,
-        pages: pagy.pages,
-        next: pagy.next,
-        prev: pagy.prev
-      }
+      pagination: pagy_metadata(pagy)
     }
 
     render json: response
