@@ -1,7 +1,7 @@
 module ChargeStationDc
   class EstacionCargaDcsController < ApplicationController
     before_action :set_estacion_carga_dc, only: %i[show update destroy]
-    load_and_authorize_resource
+    load_and_authorize_resource class: EstacionCargaDc
 
     def index
       data = EstacionCargaDc.all

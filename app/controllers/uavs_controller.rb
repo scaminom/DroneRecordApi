@@ -1,5 +1,6 @@
 class UavsController < ApplicationController
   before_action :set_uav, only: %i[show update destroy]
+  load_and_authorize_resource class: Uav
 
   def index
     pagy, uavs = pagy(Uav.all) if current_user.admin?

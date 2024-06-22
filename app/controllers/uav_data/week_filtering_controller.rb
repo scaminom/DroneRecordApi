@@ -1,5 +1,7 @@
 module UavData
   class WeekFilteringController < ApplicationController
+    load_and_authorize_resource class: DatosUav
+
     def index
       datos_uav = DatosUav.all
       context = FilteringContext.new(datos_uav, :week, filtering_params)

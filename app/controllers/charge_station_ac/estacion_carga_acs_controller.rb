@@ -1,6 +1,7 @@
 module ChargeStationAc
   class EstacionCargaAcsController < ApplicationController
     before_action :set_estacion_carga_ac, only: %i[show update destroy]
+    load_and_authorize_resource class: EstacionCargaAc
 
     def index
       data = EstacionCargaAc.all

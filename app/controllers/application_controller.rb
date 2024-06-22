@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-  load_and_authorize_resource unless: :devise_controller?
   before_action :authenticate_user!
   include Pagy::Backend
   rescue_from ActiveRecord::RecordNotFound, with: :not_found

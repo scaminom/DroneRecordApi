@@ -1,9 +1,10 @@
 module SolarPanel
   class SolarPanelsController < ApplicationController
     before_action :set_solar_panel, only: %i[show update destroy]
+    load_and_authorize_resource class: PanelSolar
 
     def index
-      data = SolarPanel.all
+      data = PanelSolar.all
 
       render json: data
     end

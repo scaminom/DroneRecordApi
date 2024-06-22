@@ -1,6 +1,7 @@
 module UavData
   class DatosUavsController < ApplicationController
     before_action :set_datos_uav, only: %i[show update destroy]
+    load_and_authorize_resource class: DatosUav
 
     def index
       data = DatosUav.all
