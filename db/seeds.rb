@@ -180,13 +180,30 @@ uavs_data = [
   { fecha_registro: '2024-06-12 16:22:10', voltaje: 12.308, porcentaje_bateria: 89.19 }
 ]
 
+def random_point_within_radius(lat, lon, radius)
+  radius_in_degrees = radius / 111_320.0
+
+  angle = 2 * Math::PI * rand
+  radius_offset = radius_in_degrees * Math.sqrt(rand)
+
+  delta_lat = radius_offset * Math.cos(angle)
+  delta_lon = radius_offset * Math.sin(angle) / Math.cos(lat * Math::PI / 180)
+
+  [lat + delta_lat, lon + delta_lon]
+end
+
+origin_lat = -1.2698667196687405
+origin_lon = -78.62546727917832
+
 uavs_data.each do |datos_uav|
+  random_lat, random_lon = random_point_within_radius(origin_lat, origin_lon, 80)
+
   datos_uav[:corriente] = Faker::Number.decimal(l_digits: 2)
   datos_uav[:modo_vuelo] = 'automatico'
   datos_uav[:velocidad] = Faker::Number.decimal(l_digits: 2)
   datos_uav[:altitud] = Faker::Number.decimal(l_digits: 2)
-  datos_uav[:latitud] = Faker::Address.latitude
-  datos_uav[:longitud] = Faker::Address.longitude
+  datos_uav[:latitud] = random_lat
+  datos_uav[:longitud] = random_lon
   datos_uav[:uav_id] = Uav.pluck(:id).sample
 
   DatosUav.create!(datos_uav)
