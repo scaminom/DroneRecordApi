@@ -38,8 +38,8 @@ module FilteringService
   class DayFilter < Base
     def filter
       date = Date.parse(@params[:date])
-      start_time = @params[:start_time]
-      end_time = @params[:end_time]
+      start_time = @params[:start_time] || '00:00'
+      end_time = @params[:end_time] || '23:59'
 
       start_datetime = DateTime.parse("#{date} #{start_time}")
       end_datetime = DateTime.parse("#{date} #{end_time}")
@@ -55,8 +55,8 @@ module FilteringService
 
   class PersonalizedFilter < Base
     def filter
-      start_date = Date.parse(@params[:start_date])
-      end_date = Date.parse(@params[:end_date])
+      start_date = Date.parse(@params[:start_date]).beginning_of_day
+      end_date = Date.parse(@params[:end_date]).end_of_day
       filter_by_uav_id(@records).where(fecha_registro: start_date..end_date)
     end
   end
