@@ -1,5 +1,6 @@
 class DroneData < ApplicationRecord
   belongs_to :drone
+  self.table_name = 'drones_data'
 
   WHITELISTED_PARAMS = %i[
     registration_date

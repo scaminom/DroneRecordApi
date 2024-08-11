@@ -28,4 +28,5 @@ gem 'pagy'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'pry', '~> 0.14.2'
 end
