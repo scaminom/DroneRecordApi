@@ -4,8 +4,8 @@ users = [
     password: '123456',
     email: 'jesusMoya@gmail.com',
     role: 'admin',
-    nombre: 'Jesus',
-    apellido: 'Moya'
+    first_name: 'Jesus',
+    last_name: 'Moya'
 
   },
   {
@@ -13,8 +13,8 @@ users = [
     password: '123456',
     email: 'juanPerez@gmail.com',
     role: 'user',
-    nombre: 'Juan',
-    apellido: 'Perez'
+    first_name: 'Juan',
+    last_name: 'Perez'
   }
 ]
 users.each do |user|

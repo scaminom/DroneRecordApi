@@ -10,16 +10,16 @@ class User < ApplicationRecord
     email
     password
     role
-    nombre
-    apellido
+    first_name
+    last_name
   ].freeze
 
   WHITELISTED_ATTRIBUTES_REGISTRATION = %i[
     username
     email
     password
-    nombre
-    apellido
+    first_name
+    last_name
   ].freeze
 
   enum role: {

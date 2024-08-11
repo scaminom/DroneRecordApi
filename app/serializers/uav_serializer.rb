@@ -10,6 +10,6 @@ class UavSerializer < Panko::Serializer
               :user_name
 
   def user_name
-    "#{object.user.apellido} #{object.user.nombre}"
+    "#{object.user.first_name} #{object.user.last_name}"
   end
 end
