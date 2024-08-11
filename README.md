@@ -63,7 +63,7 @@ Method: GET
 URL: http://localhost:3000/estacion_carga_dcs/personalized_info/3?start_date=2024-06-10&end_date=2024-06-11&page=1
 
 
-Datos Uav
+Datos Drone
 Filter by Week
 Method: GET
 URL: http://localhost:3000/datos_uavs/filter_by_week/2?page=1

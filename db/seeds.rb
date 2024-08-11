@@ -23,7 +23,7 @@ end
 
 
 3.times do
-  Uav.create(
+  Drone.create(
     nombre: Faker::Drone.name,
     descripcion: Faker::Lorem.sentence,
     numero_serie: Faker::Alphanumeric.alphanumeric(number: 10).upcase,
@@ -35,7 +35,7 @@ end
   )
 end
 
-uavs_data = [ 
+drones_data = [ 
   { fecha_registro: '2024-06-10 11:07:55', voltaje: 11.087, porcentaje_bateria: 0 },
   { fecha_registro: '2024-06-10 11:09:10', voltaje: 11.078, porcentaje_bateria: 0 },
   { fecha_registro: '2024-06-10 11:10:15', voltaje: 11.066, porcentaje_bateria: 0 },
@@ -195,18 +195,18 @@ end
 origin_lat = -1.2698667196687405
 origin_lon = -78.62546727917832
 
-uavs_data.each do |datos_uav|
+drones_data.each do |drone_data|
   random_lat, random_lon = random_point_within_radius(origin_lat, origin_lon, 80)
 
-  datos_uav[:corriente] = Faker::Number.decimal(l_digits: 2)
-  datos_uav[:modo_vuelo] = 'automatico'
-  datos_uav[:velocidad] = Faker::Number.decimal(l_digits: 2)
-  datos_uav[:altitud] = Faker::Number.decimal(l_digits: 2)
-  datos_uav[:latitud] = random_lat
-  datos_uav[:longitud] = random_lon
-  datos_uav[:uav_id] = Uav.pluck(:id).sample
+  drone_data[:corriente] = Faker::Number.decimal(l_digits: 2)
+  drone_data[:modo_vuelo] = 'automatico'
+  drone_data[:velocidad] = Faker::Number.decimal(l_digits: 2)
+  drone_data[:altitud] = Faker::Number.decimal(l_digits: 2)
+  drone_data[:latitud] = random_lat
+  drone_data[:longitud] = random_lon
+  drone_data[:uav_id] = Uav.pluck(:id).sample
 
-  DatosUav.create!(datos_uav)
+  DatosUav.create!(drone_data)
 end
 
 estaciones_carga_dc_data = [
