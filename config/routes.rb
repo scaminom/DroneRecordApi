@@ -30,13 +30,13 @@ Rails.application.routes.draw do
     get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
-  namespace :charge_station_ac, path: 'estacion_carga_acs', as: :estacion_carga_acs do
-    get '/', to: 'estacion_carga_acs#index'
-    get 'filter_by_week(/:uav_id)', to: 'week_filtering#index'
-    get 'filter_by_month(/:uav_id)', to: 'month_filtering#index'
-    get 'filter_by_day(/:uav_id)', to: 'day_filtering#index'
-    get 'current(/:uav_id)', to: 'current_filtering#index'
-    get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
+  namespace :ac_charging_station, path: 'ac_charging_stations', as: :ac_charging_stations do
+    get '/', to: 'ac_charging_stations#index'
+    get 'filter_by_week(/:drone_id)', to: 'week_filtering#index'
+    get 'filter_by_month(/:drone_id)', to: 'month_filtering#index'
+    get 'filter_by_day(/:drone_id)', to: 'day_filtering#index'
+    get 'current(/:drone_id)', to: 'current_filtering#index'
+    get 'personalized_info(/:drone_id)', to: 'personalized_filtering#index'
   end
 
   namespace :charge_station_dc, path: 'estacion_carga_dcs', as: :estacion_carga_dcs do

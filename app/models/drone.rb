@@ -1,7 +1,7 @@
 class Drone < ApplicationRecord
   belongs_to :user
   has_many :panel_solar, dependent: :destroy
-  has_many :estacion_carga_ac, dependent: :destroy
+  has_many :ac_charging_stations, dependent: :destroy
   has_many :estacion_carga_dc, dependent: :destroy
   has_many :drones_data, dependent: :destroy
 
