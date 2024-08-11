@@ -22,6 +22,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_015040) do
     t.index ["drone_id"], name: "index_ac_charging_stations_on_drone_id"
   end
 
+  create_table "dc_charging_stations", force: :cascade do |t|
+    t.datetime "registration_date", null: false
+    t.float "dc_current", null: false
+    t.float "dc_power", null: false
+    t.bigint "drone_id", null: false
+    t.index ["drone_id"], name: "index_dc_charging_stations_on_drone_id"
+  end
+
   create_table "drones", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -46,14 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_015040) do
     t.float "longitude", null: false
     t.bigint "drone_id", null: false
     t.index ["drone_id"], name: "index_drones_data_on_drone_id"
-  end
-
-  create_table "estaciones_carga_dc", force: :cascade do |t|
-    t.datetime "fecha_registro", null: false
-    t.float "corrienteDC", null: false
-    t.float "potenciaDC", null: false
-    t.bigint "drone_id", null: false
-    t.index ["drone_id"], name: "index_estaciones_carga_dc_on_drone_id"
   end
 
   create_table "solar_panels", force: :cascade do |t|
@@ -82,8 +82,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_015040) do
   end
 
   add_foreign_key "ac_charging_stations", "drones"
+  add_foreign_key "dc_charging_stations", "drones"
   add_foreign_key "drones", "users"
   add_foreign_key "drones_data", "drones"
-  add_foreign_key "estaciones_carga_dc", "drones"
   add_foreign_key "solar_panels", "drones"
 end
