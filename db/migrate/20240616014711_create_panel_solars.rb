@@ -9,7 +9,7 @@ class CreatePanelSolars < ActiveRecord::Migration[7.1]
       t.float    :Vc,             null: false
       t.float    :Cc,             null: false
 
-      t.references :uav, null: false, foreign_key: true
+      t.references :drone, null: false, foreign_key: true
     end
   end
 

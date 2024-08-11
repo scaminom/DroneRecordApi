@@ -1,6 +1,6 @@
 class CreateDrones < ActiveRecord::Migration[7.1]
   def change
-    create_table :drone do |t|
+    create_table :drones do |t|
       t.string  :name
       t.string  :description
       t.string  :serial_number
@@ -14,6 +14,6 @@ class CreateDrones < ActiveRecord::Migration[7.1]
   end
 
   def self.down
-    drop_table :drone
+    drop_table :drones
   end
 end

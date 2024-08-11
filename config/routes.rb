@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
-  resources :uavs
+  resources :drones
 
   match '*unmatched', to: 'application#no_route_found', via: :all
 end

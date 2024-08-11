@@ -5,7 +5,7 @@ class CreateEstacionCargaDcs < ActiveRecord::Migration[7.1]
       t.float    :corrienteDC,    null: false
       t.float    :potenciaDC,     null: false
 
-      t.references :uav, null: false, foreign_key: true
+      t.references :drone, null: false, foreign_key: true
     end
   end
 
