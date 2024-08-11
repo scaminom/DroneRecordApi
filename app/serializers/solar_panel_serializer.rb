@@ -1,10 +1,10 @@
 class SolarPanelSerializer < Panko::Serializer
   attributes :id,
-             :fecha_registro,
-             :Vp,
-             :Cp,
-             :Vb,
-             :Cb,
-             :Vc,
-             :Cc
+             :registration_date,
+             :panel_voltage,
+             :panel_current,
+             :battery_voltage,
+             :battery_current,
+             :controller_voltage,
+             :controller_current
 end

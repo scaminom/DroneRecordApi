@@ -1,10 +1,10 @@
 module SolarPanel
   class SolarPanelsController < ApplicationController
     before_action :set_solar_panel, only: %i[show update destroy]
-    load_and_authorize_resource class: PanelSolar
+    load_and_authorize_resource class: SolarPanel
 
     def index
-      data = PanelSolar.all
+      data = SolarPanel.all
 
       render json: data
     end
@@ -42,7 +42,7 @@ module SolarPanel
     private
 
     def set_solar_panel
-      @solar_panel = PanelSolar.find(params[:id])
+      @solar_panel = SolarPanel.find(params[:id])
     end
 
     def info_params
@@ -50,7 +50,7 @@ module SolarPanel
     end
 
     def solar_panel_params
-      params.require(:panel_solar).permit(:fecha_registro, :Vp, :Cp, :Vb, :Cb, :Vc, :Cc, :uav_id)
+      params.require(:panel_solar).permit(*SolarPanel::WHITELISTED_PARAMS)
     end
 
     def solar_panel_serializer(solar_panel)

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get 'personalized_info(/:uav_id)', to: 'personalized_filtering#index'
   end
 
-  namespace :uav_data, path: 'datos_uavs', as: :datos_uavs do
+  namespace :drones_data, path: 'drones_data', as: :drones_data do
     get '/', to: 'datos_uavs#index'
     get 'filter_by_week(/:uav_id)', to: 'week_filtering#index'
     get 'filter_by_month(/:uav_id)', to: 'month_filtering#index'
