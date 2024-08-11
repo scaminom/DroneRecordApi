@@ -1,6 +1,8 @@
 class SolarPanel < ApplicationRecord
   belongs_to :drone
 
+  include Filterable
+
   WHITELISTED_PARAMS = %i[
     registration_date
     panel_voltage
@@ -9,6 +11,6 @@ class SolarPanel < ApplicationRecord
     battery_current
     controller_voltage
     controller_current
-    uav_id
+    drone_id
   ].freeze
 end

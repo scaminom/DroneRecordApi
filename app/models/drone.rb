@@ -1,8 +1,8 @@
 class Drone < ApplicationRecord
   belongs_to :user
-  has_many :panel_solar, dependent: :destroy
+  has_many :solar_panels, dependent: :destroy
   has_many :ac_charging_stations, dependent: :destroy
-  has_many :estacion_carga_dc, dependent: :destroy
+  has_many :dc_charging_stations, dependent: :destroy
   has_many :drones_data, dependent: :destroy
 
   enum drone_type: { multirotor: 0, ala_fija: 1 }
