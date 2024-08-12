@@ -2,11 +2,17 @@ module Api
   module V1
     class AcChargingStationsController < ApplicationController
       before_action :set_ac_charging_station, only: %i[show update destroy]
-      load_and_authorize_resource class: AcChargingStation
+      load_and_authorize_resource
+
+      def filter_data
+        filtering_query = FilteringsSearchQuery.new
+        data = filtering_query.perform(AcChargingStation, params)
+
+        render json: data
+      end
 
       def index
-        filtering_query = FilteringsSearchQuery.new
-        data = filtering_query.perform(AcChargingStation, params:)
+        data = AcChargingStation.all
 
         render json: data
       end

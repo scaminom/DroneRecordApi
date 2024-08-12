@@ -2,11 +2,17 @@ module Api
   module V1
     class DronesDataController < ApplicationController
       before_action :set_drone_data, only: %i[show update destroy]
-      load_and_authorize_resource class: DroneData
+      # load_and_authorize_resource
 
-      def index
+      def filter_data
         filtering_query = FilteringsSearchQuery.new
         data = filtering_query.perform(DroneData, params)
+
+        render json: data
+      end
+
+      def index
+        data = DroneData.all
 
         render json: data
       end

@@ -2,7 +2,7 @@ module Api
   module V1
     class DronesController < ApplicationController
       before_action :set_drone, only: %i[show update destroy]
-      # load_and_authorize_resource class: drones
+      load_and_authorize_resource
 
       def index
         pagy, drones = pagy(Drone.all) if current_user.admin?

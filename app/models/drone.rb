@@ -5,6 +5,10 @@ class Drone < ApplicationRecord
   has_many :dc_charging_stations, dependent: :destroy
   has_many :drones_data, dependent: :destroy
 
+  validates :name, presence: true
+  validates :drone_type, presence: true
+  validates :serial_number, presence: true, uniqueness: true
+
   enum drone_type: { multirotor: 0, ala_fija: 1 }
   enum board_type: { arduino: 0, berrypi: 1 }
 

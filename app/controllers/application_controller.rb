@@ -2,8 +2,8 @@ class ApplicationController < ActionController::API
   before_action :authenticate_user!
   include Pagy::Backend
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
   rescue_from ActionController::RoutingError, with: :no_route_found
-  rescue_from ArgumentError, with: :handle_argument_error
   rescue_from CanCan::AccessDenied, with: :unauthorized_action
 
   def no_route_found
@@ -17,8 +17,8 @@ class ApplicationController < ActionController::API
     render json: { error: exception.message }, status: :not_found
   end
 
-  def handle_argument_error(exception)
-    render json: { error: "Invalid argument: #{exception.message}" }, status: :unprocessable_entity
+  def unprocessable_entity(exception)
+    render json: { error: exception.record.errors }, status: :unprocessable_entity
   end
 
   def unauthorized_action

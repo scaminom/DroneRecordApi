@@ -8,12 +8,13 @@ class FilteringsSearchQuery
   has_scope :by_current, type: :boolean
   has_scope :by_personalized, using: %i[start_date end_date], type: :hash
 
+  ALLOWED_SCOPES = %i[drone_id by_week by_month by_day by_current by_personalized].freeze
+
   def perform(collection, params = {})
-    if params.empty?
-      collection.all
-    else
-      apply_scopes(collection, params)
-    end
+    used_scopes = params.keys.map(&:to_sym) & ALLOWED_SCOPES
+
+    raise ArgumentError, 'At least one valid scope must be provided' if used_scopes.empty?
+
+    apply_scopes(collection, params)
   end
 end
-

@@ -4,9 +4,15 @@ module Api
       before_action :set_dc_charging_station, only: %i[show update destroy]
       load_and_authorize_resource class: DcChargingStation
 
-      def index
+      def filter_data
         filtering_query = FilteringsSearchQuery.new
-        data = filtering_query.perform(DcChargingStation, params:)
+        data = filtering_query.perform(DcChargingStation, params)
+
+        render json: data
+      end
+
+      def index
+        data = DcChargingStation.all
 
         render json: data
       end

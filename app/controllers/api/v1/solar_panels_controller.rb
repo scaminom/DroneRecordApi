@@ -2,11 +2,17 @@ module Api
   module V1
     class SolarPanelsController < ApplicationController
       before_action :set_solar_panel, only: %i[show update destroy]
-      load_and_authorize_resource class: SolarPanel
+      load_and_authorize_resource
+
+      def filter_data
+        filtering_query = FilteringsSearchQuery.new
+        data = filtering_query.perform(SolarPanel, params)
+
+        render json: data
+      end
 
       def index
-        filtering_query = FilteringsSearchQuery.new
-        data = filtering_query.perform(SolarPanel, params:)
+        data = SolarPanel.all
 
         render json: data
       end
