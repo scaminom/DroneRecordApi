@@ -7,8 +7,8 @@ class CreateDeviseToUsers < ActiveRecord::Migration[7.1]
       t.string  :email,              null: false, default: ''
       t.string  :encrypted_password, null: false, default: ''
       t.integer :role,               null: false, default: 0
-      t.string  :nombre
-      t.string  :apellido
+      t.string  :first_name
+      t.string  :last_name
     end
 
     add_index :users, :email,                unique: true
@@ -16,6 +16,6 @@ class CreateDeviseToUsers < ActiveRecord::Migration[7.1]
   end
 
   def self.down
-    raise ActiveRecord::IrreversibleMigration
+    drop_table :users
   end
 end

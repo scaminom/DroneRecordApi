@@ -1,94 +1,81 @@
-Solar panels
-Filter by Week
-Method: GET
-URL: http://localhost:3000/solar_panels/filter_by_week/2?page=1
+# Rails API Documentation
 
-Filter by Month
-Method: GET
-URL: http://localhost:3000/solar_panels/filter_by_month/2?page=1
+This documentation provides a brief overview of the available routes and how to use them.
 
-Filter by Day
-Method: GET
-URL: http://localhost:3000/solar_panels/filter_by_day/2?date=2024-05-25&start_time=00:00&end_time=16:00&page=1
+## Authentication
 
-Current
-Method: GET
-URL: http://localhost:3000/solar_panels/current/2?page=1
+### User Authentication
 
-Personalized
-Method: GET
-URL: http://localhost:3000/solar_panels/personalized_info/2?start_date=2023-06-10&end_date=2024-06-25&page=1
+- **Login:** `POST /auth/login`
+- **Logout:** `DELETE /auth/logout`
+- **Signup:** `POST /auth/signup`
 
+## API Endpoints
 
-Estacion carga ac
-Filter by Week
-Method: GET
-URL: http://localhost:3000/estacion_carga_acs/filter_by_week/2?page=1
+All API endpoints are under the `/api/v1` namespace.
 
-Filter by Month
-Method: GET
-URL: http://localhost:3000/estacion_carga_acs/filter_by_month/2?page=1
+### 1. Users
 
-Filter by Day
-Method: GET
-URL: http://localhost:3000/estacion_carga_acs/filter_by_day/2?date=2024-06-10&start_time=00:00&end_time=16:00&page=1
+- **Index:** `GET /api/v1/users`  
+  - Retrieve a list of users.
 
-Current
-Method: GET
-URL: http://localhost:3000/estacion_carga_acs/current/2?page=1
+### 2. Drones
 
-Personalized
-Method: GET
-URL: http://localhost:3000/estacion_carga_acs/personalized_info/2?start_date=2023-05-25&end_date=2024-06-25&page=1
+- **Index:** `GET /api/v1/drones`
+- **Show:** `GET /api/v1/drones/:id`
+- **Create:** `POST /api/v1/drones`
+- **Update:** `PUT /api/v1/drones/:id`
+- **Destroy:** `DELETE /api/v1/drones/:id`
 
-Estacion carga dc
-Filter by Week
-Method: GET
-URL: http://localhost:3000/estacion_carga_dcs/filter_by_week/2?page=1
+### 3. Solar Panels
 
-Filter by Month
-Method: GET
-URL: http://localhost:3000/estacion_carga_dcs/filter_by_month/1?page=1
+- **Index:** `GET /api/v1/solar_panels`  
+  - Retrieve a list of solar panels.  
+  - **Supported Scopes:**
+    - `drone_id`: Filter by the associated drone ID.
+    - `by_week`: Filter by the current week.
+    - `by_month`: Filter by the current month.
+    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
+    - `by_current`: Retrieve the most recent 5 records.
+    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
 
-Filter by Day
-Method: GET
-URL: http://localhost:3000/estacion_carga_dcs/filter_by_day/2?date=2024-06-10&start_time=00:00&end_time=16:00?page=1
+### 4. DC Charging Stations
 
-Current
-Method: GET
-URL: http://localhost:3000/estacion_carga_dcs/current?page=1
+- **Index:** `GET /api/v1/dc_charging_stations`  
+  - Retrieve a list of DC charging stations.  
+  - **Supported Scopes:**
+    - `drone_id`: Filter by the associated drone ID.
+    - `by_week`: Filter by the current week.
+    - `by_month`: Filter by the current month.
+    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
+    - `by_current`: Retrieve the most recent 5 records.
+    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
 
-Personalized
-Method: GET
-URL: http://localhost:3000/estacion_carga_dcs/personalized_info/3?start_date=2024-06-10&end_date=2024-06-11&page=1
+### 5. AC Charging Stations
 
+- **Index:** `GET /api/v1/ac_charging_stations`  
+  - Retrieve a list of AC charging stations.  
+  - **Supported Scopes:**
+    - `drone_id`: Filter by the associated drone ID.
+    - `by_week`: Filter by the current week.
+    - `by_month`: Filter by the current month.
+    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
+    - `by_current`: Retrieve the most recent 5 records.
+    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
 
-Datos Uav
-Filter by Week
-Method: GET
-URL: http://localhost:3000/datos_uavs/filter_by_week/2?page=1
+### 6. UAV Data (`DatosUAVs`)
 
-Filter by Month
-Method: GET
-URL: http://localhost:3000/datos_uavs/filter_by_month/2?page=1
+- **Index:** `GET /api/v1/datos_uavs`  
+  - Retrieve a list of UAV data.  
+  - **Supported Scopes:**
+    - `drone_id`: Filter by the associated drone ID.
+    - `by_week`: Filter by the current week.
+    - `by_month`: Filter by the current month.
+    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
+    - `by_current`: Retrieve the most recent 5 records.
+    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
 
-Filter by Day
-Method: GET
-URL: http://localhost:3000/datos_uavs/filter_by_day/2?date=2024-06-10&start_time=00:00&end_time=16:00&page=1
+## Error Handling
 
-Current
-Method: GET
-URL: http://localhost:3000/datos_uavs/current/2?page=1
-
-Personalized
-Method: GET
-URL: http://localhost:3000/datos_uavs/personalized_info/2?start_date=2024-05-25&end_date=2024-06-25&page=1
-
-First Date:
-'fecha_registro: Sat, 25 May 2024 13:51:06.000000000 UTC +00:00'
-
-Last Date:
-'fecha_registro: Mon, 27 May 2024 01:20:36.000000000 UTC +00:00'
-
-CRUD for uav
-URL: http://localhost:3000/uavs
+- **No Route Found:**  
+  - `ANY *unmatched` returns a `404 Not Found` error.

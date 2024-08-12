@@ -2,21 +2,16 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] || 'root' %>
-  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  username: 'postgres'
+  password: 'root'
 
 development:
   <<: *default
   database: drone-db
-  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] || 'root' %>
 
 test:
   <<: *default
   database: drone-db-test
-  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] || 'root' %>
 
 production:
   <<: *default

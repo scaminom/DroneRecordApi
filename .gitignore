@@ -33,3 +33,6 @@
 /config/master.key
 
 /config/puma.rb
+
+# Ignore byebug command history file.
+.byebug_history
