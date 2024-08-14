@@ -45,10 +45,10 @@ created_users.each do |user|
     drones << Drone.create!(
       name: Faker::Space.nasa_space_craft,
       description: Faker::Lorem.sentence(word_count: 10),
-      serial_number: Faker::Device.serial,
-      drone_type: [0, 1].sample, # multirotor or ala_fija
+      serial_number: "#{Faker::Device.serial}-#{SecureRandom.uuid}",
+      drone_type: [0, 1].sample,
       battery_capacity: Faker::Number.between(from: 1000.0, to: 5000.0),
-      board_type: [0, 1].sample, # arduino or berrypi
+      board_type: [0, 1].sample,
       max_wind_speed: Faker::Number.between(from: 10.0, to: 100.0),
       user:
     )

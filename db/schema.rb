@@ -31,14 +31,15 @@ ActiveRecord::Schema[7.1].define(version: 20_240_616_015_040) do
   end
 
   create_table 'drones', force: :cascade do |t|
-    t.string 'name'
+    t.string 'name', null: false
     t.string 'description'
-    t.string 'serial_number'
-    t.integer 'drone_type'
-    t.float 'battery_capacity'
-    t.integer 'board_type'
+    t.string 'serial_number', null: false
+    t.integer 'drone_type', null: false
+    t.float 'battery_capacity', null: false
+    t.integer 'board_type', null: false
     t.float 'max_wind_speed'
     t.bigint 'user_id', null: false
+    t.index ['serial_number'], name: 'index_drones_on_serial_number', unique: true
     t.index ['user_id'], name: 'index_drones_on_user_id'
   end
 
@@ -70,8 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_616_015_040) do
 
   create_table 'users', force: :cascade do |t|
     t.string 'username', null: false
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
+    t.string 'email', null: false
+    t.string 'encrypted_password', null: false
     t.integer 'role', default: 0, null: false
     t.string 'first_name'
     t.string 'last_name'
@@ -87,3 +88,4 @@ ActiveRecord::Schema[7.1].define(version: 20_240_616_015_040) do
   add_foreign_key 'drones_data', 'drones'
   add_foreign_key 'solar_panels', 'drones'
 end
+

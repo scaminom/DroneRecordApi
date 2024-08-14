@@ -6,7 +6,6 @@ gem 'bootsnap', require: false
 gem 'cancancan'
 gem 'devise'
 gem 'devise-jwt'
-gem 'faker'
 gem 'has_scope'
 gem 'pagy'
 gem 'panko_serializer'
@@ -19,5 +18,8 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 group :development, :test do
   gem 'byebug'
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry', '~> 0.14.2'
+  gem 'rspec-rails'
 end
