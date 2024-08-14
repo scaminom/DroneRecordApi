@@ -3,10 +3,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { minimum: 6 }
+  # Enum
+  enum role: { user: 0, admin: 1 }
 
-  has_many :uavs, dependent: :destroy
+  # Associations
+  has_many :drones, dependent: :destroy
+
+  # Validations
+  validates :username, presence: true, uniqueness: { message: ': An account associated with %<value>s already exists' }
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true, length: { is: 6 }, on: :create
+
+  validates :role, presence: true, inclusion: { in: roles.keys, message: '%<value>s is not a valid role' }
+
+  validates :first_name, :last_name, format: { with: /\A[a-zA-Z]+\z/, message: 'only allows letters' }
 
   WHITELISTED_ATTRIBUTES = %i[
     username
@@ -25,8 +35,9 @@ class User < ApplicationRecord
     last_name
   ].freeze
 
-  enum role: {
-    'user': 0,
-    'admin': 1
-  }
+  def jwt_payload
+    super.merge('first_name' => first_name,
+                'last_name' => last_name,
+                'role' => role)
+  end
 end

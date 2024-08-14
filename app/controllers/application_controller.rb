@@ -41,4 +41,8 @@ class ApplicationController < ActionController::API
       prev: pagy.prev
     }
   end
+
+  def current_token
+    request.env['warden-jwt_auth.token']
+  end
 end

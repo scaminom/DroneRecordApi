@@ -2,6 +2,9 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # Raise an error for unpermitted parameters
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

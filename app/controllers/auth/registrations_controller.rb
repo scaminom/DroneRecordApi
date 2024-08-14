@@ -14,7 +14,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   def respond_with(resource, _options = {})
     if resource.persisted?
       render json: {
-        status: { code: 200, message: 'Signed up successfully', data: resource }
+        status: { code: 200, message: 'Signed up successfully', data: resource, token: current_token }
       }
     else
       render json: {

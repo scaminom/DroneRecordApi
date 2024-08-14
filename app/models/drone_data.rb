@@ -1,8 +1,16 @@
 class DroneData < ApplicationRecord
-  belongs_to :drone
   self.table_name = 'drones_data'
 
   include Filterable
+
+  # Associations
+  belongs_to :drone
+
+  # Validations
+  validates :registration_date, presence: true
+  validates :flight_mode, length: { maximum: 30 }
+  validates :voltage, :battery_percentage, :current, :speed, :altitude, :latitude, :longitude, presence: true,
+                                                                                               numericality: true
 
   WHITELISTED_PARAMS = %i[
     registration_date
