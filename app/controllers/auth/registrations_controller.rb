@@ -22,7 +22,7 @@ module Auth
         render json: {
           status: {
             message: 'User could not be created successfully',
-            errors: resource.errors.full_messages
+            errors:  resource.errors.full_messages
           }
         }, status: :unprocessable_entity
       end

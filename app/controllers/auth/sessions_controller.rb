@@ -13,20 +13,18 @@ module Auth
     end
 
     def respond_to_on_destroy
-      if request.headers['Authorization'].present?
-        jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
-                                 Rails.application.credentials.fetch(:secret_key_base)).first
-        current_user = User.find(jwt_payload['sub'])
-      end
+      token = request.headers['Authorization']&.split&.last
+      jwt_payload = JwtDecoder.new(token).decode if token
+      current_user = User.find(jwt_payload['sub']) if jwt_payload
 
       if current_user
         render json: {
-          status: 200,
+          status:  200,
           message: 'Logged out successfully.'
         }
       else
         render json: {
-          status: 401,
+          status:  401,
           message: "Couldn't find an active session."
         }
       end

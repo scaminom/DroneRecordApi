@@ -14,7 +14,7 @@ module Api
         end
 
         response = {
-          data: serializerd_drones,
+          data:       serializerd_drones,
           pagination: pagy_metadata(pagy)
         }
 

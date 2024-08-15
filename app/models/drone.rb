@@ -18,9 +18,9 @@ class Drone < ApplicationRecord
                             length: { maximum: 255 }
   validates :battery_capacity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :max_wind_speed, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :drone_type, presence: true,
+  validates :drone_type, presence:  true,
                          inclusion: { in: drone_types.keys, message: '%<value>s is not a valid drone type' }
-  validates :board_type, presence: true,
+  validates :board_type, presence:  true,
                          inclusion: { in: board_types.keys, message: '%<value>s is not a valid board type' }
 
   WHITELISTED_ATTRIBUTES = [
