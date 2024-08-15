@@ -3,5 +3,5 @@ class AcChargingStation < ApplicationRecord
 
   include Filterable
 
-  WHITELISTED_ATTRIBUTES = %i[registration_date ac_current ac_power].freeze
+  WHITELISTED_ATTRIBUTES = [:registration_date, :ac_current, :ac_power].freeze
 end

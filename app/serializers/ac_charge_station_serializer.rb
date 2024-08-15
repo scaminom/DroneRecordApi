@@ -3,4 +3,4 @@ class AcChargeStationSerializer < Panko::Serializer
              :fecha_registro,
              :corrienteAC,
              :potenciaAC
-end 
+end

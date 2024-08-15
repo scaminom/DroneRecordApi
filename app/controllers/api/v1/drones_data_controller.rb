@@ -1,7 +1,7 @@
 module Api
   module V1
     class DronesDataController < ApplicationController
-      before_action :set_drone_data, only: %i[show update destroy]
+      before_action :set_drone_data, only: [:show, :update, :destroy]
       # load_and_authorize_resource
 
       def filter_data

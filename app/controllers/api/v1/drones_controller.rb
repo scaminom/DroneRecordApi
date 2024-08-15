@@ -1,7 +1,7 @@
 module Api
   module V1
     class DronesController < ApplicationController
-      before_action :set_drone, only: %i[show update destroy]
+      before_action :set_drone, only: [:show, :update, :destroy]
       load_and_authorize_resource
 
       def index
@@ -26,12 +26,12 @@ module Api
       end
 
       def create
-        @drone = Drone.new(uav_params)
+        drone = Drone.new(uav_params)
 
-        if @drone.save
-          render json: @drone, status: :created
+        if drone.save
+          render json: drone, status: :created
         else
-          render json: @drone.errors, status: :unprocessable_entity
+          render json: drone.errors, status: :unprocessable_entity
         end
       end
 

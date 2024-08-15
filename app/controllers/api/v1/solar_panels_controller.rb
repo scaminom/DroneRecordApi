@@ -1,7 +1,7 @@
 module Api
   module V1
     class SolarPanelsController < ApplicationController
-      before_action :set_solar_panel, only: %i[show update destroy]
+      before_action :set_solar_panel, only: [:show, :update, :destroy]
       load_and_authorize_resource
 
       def filter_data

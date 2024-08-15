@@ -6,9 +6,9 @@ class FilteringsSearchQuery
   has_scope :by_month, type: :boolean
   has_scope :by_day, using: [:date]
   has_scope :by_current, type: :boolean
-  has_scope :by_personalized, using: %i[start_date end_date], type: :hash
+  has_scope :by_personalized, using: [:start_date, :end_date], type: :hash
 
-  ALLOWED_SCOPES = %i[drone_id by_week by_month by_day by_current by_personalized].freeze
+  ALLOWED_SCOPES = [:drone_id, :by_week, :by_month, :by_day, :by_current, :by_personalized].freeze
 
   def perform(collection, params = {})
     used_scopes = params.keys.map(&:to_sym) & ALLOWED_SCOPES
