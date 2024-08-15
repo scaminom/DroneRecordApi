@@ -88,4 +88,3 @@ ActiveRecord::Schema[7.1].define(version: 20_240_616_015_040) do
   add_foreign_key 'drones_data', 'drones'
   add_foreign_key 'solar_panels', 'drones'
 end
-

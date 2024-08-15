@@ -12,16 +12,16 @@ class DroneData < ApplicationRecord
   validates :voltage, :battery_percentage, :current, :speed, :altitude, :latitude, :longitude, presence: true,
                                                                                                numericality: true
 
-  WHITELISTED_PARAMS = %i[
-    registration_date
-    voltage
-    battery_percentage
-    current
-    flight_mode
-    speed
-    altitude
-    latitude
-    longitude
-    uav_id
+  WHITELISTED_PARAMS = [
+    :registration_date,
+    :voltage,
+    :battery_percentage,
+    :current,
+    :flight_mode,
+    :speed,
+    :altitude,
+    :latitude,
+    :longitude,
+    :uav_id
   ].freeze
 end

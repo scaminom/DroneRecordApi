@@ -1,7 +1,7 @@
 module Api
   module V1
     class DcChargingStationsController < ApplicationController
-      before_action :set_dc_charging_station, only: %i[show update destroy]
+      before_action :set_dc_charging_station, only: [:show, :update, :destroy]
       load_and_authorize_resource class: DcChargingStation
 
       def filter_data

@@ -28,7 +28,8 @@ class ApplicationController < ActionController::API
   protected
 
   def filtering_params
-    params.slice(:start_date, :end_date, :date, :start_time, :end_time).merge(uav_id: params[:uav_id])
+    params.slice(:start_date, :end_date, :date, :start_time,
+                 :end_time).merge(uav_id: params[:uav_id])
   end
 
   def pagy_metadata(pagy)

@@ -1,3 +1,4 @@
+# rubocop:disable Rails/I18nLocaleTexts
 class Drone < ApplicationRecord
   # Enum
   enum drone_type: { multirotor: 0, ala_fija: 1 }
@@ -22,15 +23,15 @@ class Drone < ApplicationRecord
   validates :board_type, presence: true,
                          inclusion: { in: board_types.keys, message: '%<value>s is not a valid board type' }
 
-  WHITELISTED_ATTRIBUTES = %i[
-    id
-    name
-    description
-    serial_number
-    drone_type
-    battery_capacit
-    board_type
-    max_wind_speed
-    user_id
+  WHITELISTED_ATTRIBUTES = [
+    :id,
+    :name,
+    :description,
+    :serial_number,
+    :drone_type,
+    :battery_capacit,
+    :board_type,
+    :max_wind_speed,
+    :user_id
   ].freeze
 end

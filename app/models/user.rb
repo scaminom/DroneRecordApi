@@ -1,3 +1,4 @@
+# rubocop:disable Rails/I18nLocaleTexts
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable, :registerable, :validatable,
@@ -18,21 +19,21 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, format: { with: /\A[a-zA-Z]+\z/, message: 'only allows letters' }
 
-  WHITELISTED_ATTRIBUTES = %i[
-    username
-    email
-    password
-    role
-    first_name
-    last_name
+  WHITELISTED_ATTRIBUTES = [
+    :username,
+    :email,
+    :password,
+    :role,
+    :first_name,
+    :last_name
   ].freeze
 
-  WHITELISTED_ATTRIBUTES_REGISTRATION = %i[
-    username
-    email
-    password
-    first_name
-    last_name
+  WHITELISTED_ATTRIBUTES_REGISTRATION = [
+    :username,
+    :email,
+    :password,
+    :first_name,
+    :last_name
   ].freeze
 
   def jwt_payload
