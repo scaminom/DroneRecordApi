@@ -320,6 +320,7 @@ Devise.setup do |config|
       ['DELETE', %r{^/auth/logout$}]
     ]
     jwt.expiration_time = 1.hour.to_i
+    jwt.algorithm = 'HS256'
   end
 
   config.warden do |warden|

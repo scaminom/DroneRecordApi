@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
   rescue_from ActionController::RoutingError, with: :no_route_found
   rescue_from CanCan::AccessDenied, with: :unauthorized_action
+  rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
 
   def no_route_found
     route_info = "No route matches [#{request.method}] \"#{request.original_fullpath}\""
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::API
 
   def unauthorized_action
     render json: { error: 'You are not allowed to performance this action' }, status: :unauthorized
+  end
+
+  def handle_parse_error
+    render json: { error: 'Invalid JSON format' }, status: :bad_request
   end
 
   protected

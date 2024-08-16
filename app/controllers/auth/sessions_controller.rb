@@ -25,7 +25,7 @@ module Auth
       else
         render json: {
           status:  401,
-          message: "Couldn't find an active session."
+          message: "Token can't be found."
         }
       end
     end
