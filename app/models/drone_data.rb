@@ -9,7 +9,7 @@ class DroneData < ApplicationRecord
   # Validations
   validates :registration_date, presence: true
   validates :flight_mode, length: { maximum: 30 }
-  validates :voltage, :battery_percentage, :current, :speed, :altitude, :latitude, :longitude, presence: true,
+  validates :voltage, :battery_percentage, :current, :speed, :altitude, :latitude, :longitude, presence:     true,
                                                                                                numericality: true
 
   WHITELISTED_PARAMS = [
@@ -22,6 +22,6 @@ class DroneData < ApplicationRecord
     :altitude,
     :latitude,
     :longitude,
-    :uav_id
+    :drone_id
   ].freeze
 end
