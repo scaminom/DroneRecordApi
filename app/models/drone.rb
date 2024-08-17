@@ -1,4 +1,3 @@
-# rubocop:disable Rails/I18nLocaleTexts
 class Drone < ApplicationRecord
   # Enum
   enum drone_type: { multirotor: 0, ala_fija: 1 }
@@ -14,14 +13,11 @@ class Drone < ApplicationRecord
   # Validations
   validates :name, presence: true, length: { in: 3..50 }
   validates :description, length: { maximum: 500 }, allow_nil: true
-  validates :serial_number, presence: true, uniqueness: { message: 'the %<value>s already exists' },
-                            length: { maximum: 255 }
+  validates :serial_number, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :battery_capacity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :max_wind_speed, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :drone_type, presence:  true,
-                         inclusion: { in: drone_types.keys, message: '%<value>s is not a valid drone type' }
-  validates :board_type, presence:  true,
-                         inclusion: { in: board_types.keys, message: '%<value>s is not a valid board type' }
+  validates :drone_type, presence:  true, inclusion: { in: drone_types.keys }
+  validates :board_type, presence:  true, inclusion: { in: board_types.keys }
 
   WHITELISTED_ATTRIBUTES = [
     :id,

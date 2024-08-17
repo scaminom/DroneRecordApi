@@ -2,7 +2,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user, only: [:show, :destroy]
-      load_and_authorize_resource class: User
+      load_and_authorize_resource
 
       def index
         users = User.all

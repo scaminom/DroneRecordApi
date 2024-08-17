@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, path: 'auth', path_names: {
-    sign_in: 'login',
-    sign_out: 'logout',
+    sign_in:      'login',
+    sign_out:     'logout',
     registration: 'signup'
   }, controllers: {
-    sessions: 'auth/sessions',
+    sessions:      'auth/sessions',
     registrations: 'auth/registrations'
   }
 
@@ -22,8 +22,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :ac_charging_stations, only: %i[show create update destroy]
-      resources :drones_data, only: %i[show]
+      resources :ac_charging_stations, only: %i[index show create update destroy]
+      resources :drones_data, only: %i[index show create]
     end
   end
 

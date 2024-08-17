@@ -22,6 +22,6 @@ class DroneData < ApplicationRecord
     :altitude,
     :latitude,
     :longitude,
-    :uav_id
+    :drone_id
   ].freeze
 end

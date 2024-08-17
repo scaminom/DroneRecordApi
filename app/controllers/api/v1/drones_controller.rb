@@ -5,20 +5,11 @@ module Api
       load_and_authorize_resource
 
       def index
-        pagy, drones = pagy(Drone.all) if current_user.admin?
+        drones = Drone.all
 
-        pagy, drones = pagy(Uav.where(user_id: current_user)) if current_user.user?
-
-        serializerd_drones = drones.map do |drone|
-          DroneSerializer.new.serialize(drone)
-        end
-
-        response = {
-          data:       serializerd_drones,
-          pagination: pagy_metadata(pagy)
-        }
-
-        render json: response
+        render json: Panko::ArraySerializer.new(
+          drones, each_serializer: DroneSerializer
+        ).to_json
       end
 
       def show
