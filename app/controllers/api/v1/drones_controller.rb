@@ -26,7 +26,7 @@ module Api
       end
 
       def create
-        drone = Drone.new(uav_params)
+        drone = Drone.new(drone_params)
 
         if drone.save
           render json: drone, status: :created
@@ -36,7 +36,7 @@ module Api
       end
 
       def update
-        if @drone.update(uav_params)
+        if @drone.update(drone_params)
           render json: @drone
         else
           render json: @drone.errors, status: :unprocessable_entity
@@ -54,7 +54,7 @@ module Api
       end
 
       def drone_params
-        params.require(:drone).permit(*Dron::WHITELISTED_ATTRIBUTES)
+        params.require(:drone).permit(*Drone::WHITELISTED_ATTRIBUTES)
       end
     end
   end

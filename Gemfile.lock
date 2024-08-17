@@ -310,6 +310,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   has_scope
+  i18n
   pagy
   panko_serializer
   pg (~> 1.1)

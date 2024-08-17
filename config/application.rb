@@ -9,6 +9,8 @@ module DroneRecordApi
     config.time_zone = 'America/Guayaquil'
     config.load_defaults 7.1
     config.action_dispatch.rescue_responses.merge!('CanCan::AccessDenied' => :unauthorized)
+    I18n.load_path += Dir[File.expand_path('config/locales') + '/*.yml']
+    config.i18n.default_locale = :es
     config.autoload_lib(ignore: ['assets', 'tasks'])
     config.api_only = true
   end
