@@ -1,16 +1,13 @@
 class Drone < ApplicationRecord
-  # Enum
-  enum drone_type: { multirotor: 0, ala_fija: 1 }
-  enum board_type: { arduino: 0, berrypi: 1 }
-
-  # Associations
   belongs_to :user
   has_many :solar_panels, dependent: :destroy
   has_many :ac_charging_stations, dependent: :destroy
   has_many :dc_charging_stations, dependent: :destroy
-  has_many :drones_data, dependent: :destroy
+  has_many :drones_data, class_name: 'DroneData', dependent: :destroy
 
-  # Validations
+  enum drone_type: { multirotor: 0, ala_fija: 1 }
+  enum board_type: { arduino: 0, berrypi: 1 }
+
   validates :name, presence: true, length: { in: 3..50 }
   validates :description, length: { maximum: 500 }, allow_nil: true
   validates :serial_number, presence: true, uniqueness: true, length: { maximum: 255 }
@@ -25,7 +22,7 @@ class Drone < ApplicationRecord
     :description,
     :serial_number,
     :drone_type,
-    :battery_capacit,
+    :battery_capacity,
     :board_type,
     :max_wind_speed,
     :user_id

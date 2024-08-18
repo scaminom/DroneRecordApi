@@ -10,16 +10,21 @@ RSpec.describe User do
 
     it { is_expected.to validate_presence_of(:username) }
     it { is_expected.to validate_uniqueness_of(:username) }
+
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     it { is_expected.to allow_value('user@example.com').for(:email) }
     it { is_expected.not_to allow_value('invalid_email').for(:email) }
+
     it { is_expected.to validate_presence_of(:password).on(:create) }
     it { is_expected.to validate_length_of(:password).is_at_least(6).on(:create) }
+
     it { is_expected.to validate_presence_of(:role) }
-    it { is_expected.to define_enum_for(:role).with_values(user: 0, admin: 1) }
+    it { is_expected.to define_enum_for(:role).with_values(%w[user admin]) }
+
     it { is_expected.to allow_value('John').for(:first_name) }
     it { is_expected.not_to allow_value('John123').for(:first_name) }
+
     it { is_expected.to allow_value('Doe').for(:last_name) }
     it { is_expected.not_to allow_value('Doe123').for(:last_name) }
   end
