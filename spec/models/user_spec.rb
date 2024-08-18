@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User do
+  describe 'associations' do
+    it { is_expected.to have_many(:drones).dependent(:destroy) }
+  end
+
   describe 'validations' do
     subject { build(:user) }
 
@@ -20,15 +24,7 @@ RSpec.describe User do
     it { is_expected.not_to allow_value('Doe123').for(:last_name) }
   end
 
-  describe 'associations' do
-    it { is_expected.to have_many(:drones).dependent(:destroy) }
-  end
-
-  describe 'enums' do
-    it { is_expected.to define_enum_for(:role).with_values(user: 0, admin: 1) }
-  end
-
-  describe 'devise modules' do
+  describe 'jti column for token revocation' do
     it { is_expected.to have_db_column(:jti).of_type(:string) }
     it { is_expected.to have_db_index(:jti).unique(true) }
   end

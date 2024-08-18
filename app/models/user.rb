@@ -4,19 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  # Enum
-  enum role: { user: 0, admin: 1 }
-
-  # Associations
   has_many :drones, dependent: :destroy
 
-  # Validations
+  enum role: { user: 0, admin: 1 }
+
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { in: 6..20 }, on: :create
-
   validates :role, presence: true, inclusion: { in: roles.keys }
-
   validates :first_name, :last_name, format: { with: /\A[a-zA-Z]+\z/ }
 
   WHITELISTED_ATTRIBUTES = [
