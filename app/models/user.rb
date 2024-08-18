@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # Validations
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { is: 6 }, on: :create
+  validates :password, presence: true, length: { in: 6..20 }, on: :create
 
   validates :role, presence: true, inclusion: { in: roles.keys }
 
