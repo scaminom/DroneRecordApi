@@ -8,17 +8,15 @@ RSpec.describe Api::V1::UsersController do
   end
 
   describe 'GET #index' do
-    context 'when the user is an admin' do
-      it 'returns a successful response' do
-        get :index, format: :json
-        expect(response).to have_http_status(:ok)
-      end
+    it 'returns a successful response' do
+      get :index, format: :json
+      expect(response).to have_http_status(:ok)
+    end
 
-      it 'returns all users' do
-        create_list(:user, 3)
-        get :index, format: :json
-        expect(response.parsed_body.size).to eq(4)
-      end
+    it 'returns all users' do
+      create_list(:user, 3)
+      get :index, format: :json
+      expect(response.parsed_body.size).to eq(4)
     end
   end
 
