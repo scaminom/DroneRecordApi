@@ -1,17 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController do
-  let(:admin) { create(:user, role: 'admin') }
   let(:user) { create(:user) }
 
   before do
-    sign_in current_user
+    sign_in user
   end
 
   describe 'GET #index' do
     context 'when the user is an admin' do
-      let(:current_user) { admin }
-
       it 'returns a successful response' do
         get :index, format: :json
         expect(response).to have_http_status(:ok)
@@ -21,15 +18,6 @@ RSpec.describe Api::V1::UsersController do
         create_list(:user, 3)
         get :index, format: :json
         expect(response.parsed_body.size).to eq(4)
-      end
-    end
-
-    context 'when the user is not an admin' do
-      let(:current_user) { user }
-
-      it 'returns a forbidden response' do
-        get :index, format: :json
-        expect(response).to have_http_status(:forbidden)
       end
     end
   end

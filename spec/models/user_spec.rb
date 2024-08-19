@@ -34,7 +34,7 @@ RSpec.describe User do
     it { is_expected.to have_db_index(:jti).unique(true) }
   end
 
-  describe 'constants' do
+  describe 'allowed params' do
     it 'has correct WHITELISTED_ATTRIBUTES' do
       expect(User::WHITELISTED_ATTRIBUTES).to eq([:username, :email, :password, :role, :first_name, :last_name])
     end

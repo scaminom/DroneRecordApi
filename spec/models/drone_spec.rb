@@ -33,7 +33,7 @@ RSpec.describe Drone do
     it { is_expected.to define_enum_for(:board_type).with_values(%w[arduino berrypi]) }
   end
 
-  describe 'constants' do
+  describe 'allowed params' do
     it 'has correct WHITELISTED_ATTRIBUTES' do
       expect(Drone::WHITELISTED_ATTRIBUTES).to eq([:id, :name, :description, :serial_number, :drone_type, :battery_capacity,
                                                    :board_type, :max_wind_speed, :user_id])
