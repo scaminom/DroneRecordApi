@@ -1,4 +1,4 @@
-module Api
+mdule Api
   module V1
     class SolarPanelsController < ApplicationController
       before_action :set_solar_panel, only: [:show, :update, :destroy]

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :drones_data, only: %i[index show create]
+      resources :drones_data, only: %i[show create]
     end
   end
 
