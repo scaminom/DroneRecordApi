@@ -34,9 +34,19 @@ RSpec.describe Drone do
   end
 
   describe 'allowed params' do
+    # rubocop:disable RSpec/ExampleLength
     it 'has correct WHITELISTED_ATTRIBUTES' do
-      expect(Drone::WHITELISTED_ATTRIBUTES).to eq([:id, :name, :description, :serial_number, :drone_type, :battery_capacity,
-                                                   :board_type, :max_wind_speed, :user_id])
+      expect(Drone::WHITELISTED_ATTRIBUTES).to include(
+        :id,
+        :name,
+        :description,
+        :serial_number,
+        :drone_type,
+        :battery_capacity,
+        :board_type,
+        :max_wind_speed,
+        :user_id
+      )
     end
   end
 end

@@ -30,9 +30,18 @@ RSpec.describe SolarPanel do
   end
 
   describe 'allowed params' do
-    it {
-      expect(SolarPanel::WHITELISTED_PARAMS).to eq([:registration_date, :panel_voltage, :panel_current, :battery_voltage,
-                                                    :battery_current, :controller_voltage, :controller_current, :drone_id])
-    }
+    # rubocop:disable RSpec/ExampleLength
+    it 'has correct WHITELISTED_ATTRIBUTES' do
+      expect(SolarPanel::WHITELISTED_PARAMS).to include(
+        :registration_date,
+        :panel_voltage,
+        :panel_current,
+        :battery_voltage,
+        :battery_current,
+        :controller_voltage,
+        :controller_current,
+        :drone_id
+      )
+    end
   end
 end

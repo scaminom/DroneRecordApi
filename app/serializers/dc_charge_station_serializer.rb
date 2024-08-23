@@ -2,5 +2,6 @@ class DcChargeStationSerializer < Panko::Serializer
   attributes :id,
              :fecha_registro,
              :corrienteDC,
-             :potenciaDC
+             :potenciaDC,
+             :drone_id
 end
