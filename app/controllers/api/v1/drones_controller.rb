@@ -22,7 +22,7 @@ module Api
         if drone.save
           render json: drone, status: :created
         else
-          render json: drone.errors, status: :unprocessable_entity
+          render json: { errors: drone.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -30,12 +30,16 @@ module Api
         if @drone.update(drone_params)
           render json: @drone
         else
-          render json: @drone.errors, status: :unprocessable_entity
+          render json: { errors: @drone.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @drone.destroy!
+        if @drone.destroy
+          render json: { message: 'drone deleted successfully' }
+        else
+          render json: { errors: @drone.errors.full_messages }, status: :unprocessable_entity
+        end
       end
 
       private

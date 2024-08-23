@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
       resources :drones, only: %i[index show create update destroy]
 
-      %i[solar_panels dc_charging_stations ac_charging_stations drones_data].each do |resource|
+      [:solar_panels, :dc_charging_stations, :ac_charging_stations, :drones_data].each do |resource|
         resources resource, only: :index do
           collection do
             get :filter_data
@@ -22,8 +22,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :ac_charging_stations, only: %i[index show create update destroy]
-      resources :drones_data, only: %i[index show create]
+      resources :drones_data, only: %i[show create]
     end
   end
 

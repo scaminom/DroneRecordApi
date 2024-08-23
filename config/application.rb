@@ -9,7 +9,7 @@ module DroneRecordApi
     config.time_zone = 'America/Guayaquil'
     config.load_defaults 7.1
     I18n.load_path += Dir[File.expand_path('config/locales') + '/*.yml']
-    config.i18n.default_locale = :es
+    config.i18n.default_locale = :en
     config.autoload_lib(ignore: ['assets', 'tasks'])
     config.api_only = true
   end

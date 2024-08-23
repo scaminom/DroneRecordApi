@@ -6,5 +6,6 @@ class SolarPanelSerializer < Panko::Serializer
              :battery_voltage,
              :battery_current,
              :controller_voltage,
-             :controller_current
+             :controller_current,
+             :drone_id
 end

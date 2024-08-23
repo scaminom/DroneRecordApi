@@ -116,20 +116,11 @@ Layout/EndAlignment:
     - keyword
     - variable
 
-Rails/SkipsModelValidations:
+RSpec/DescribeClass:
   Enabled: false
-
-RSpec/MultipleExpectations:
-  Max: 5
-
-RSpec/ExampleLength:
-  Max: 20
 
 RSpec/NestedGroups:
   Max: 5
-
-RSpec/MessageSpies:
-  EnforcedStyle: receive
 
 RSpec/ContextWording:
   Prefixes:
@@ -137,4 +128,3 @@ RSpec/ContextWording:
     - when
     - with
     - without
-
