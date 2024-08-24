@@ -6,21 +6,27 @@ module Api
       def index
         data = DroneData.all
 
-        render json: data
+        response = Panko::ArraySerializer.new(
+          data, each_serializer: DroneDataSerializer
+        ).to_a
+
+        render_success_response(data: { drones_data: response })
       end
 
       def show
         drone_data = DroneData.find(params[:id])
-        render json: DroneDataSerializer.new.serialize(drone_data)
+        render_success_response(data: { drone_data: DroneDataSerializer.new(except: [:registration_date])
+          .serialize(drone_data) })
       end
 
       def create
         drone_data = DroneData.new(drone_data_params)
 
         if drone_data.save
-          render json: drone_data, status: :created
+          render_success_response(data: { drone_data: }, status: :created)
         else
-          render json: { errors: drone_data.errors.full_messages }, status: :unprocessable_entity
+          render_error_response(drone_data.errors.full_messages, status:  :unprocessable_entity,
+                                                                 message: 'drone data could not be created')
         end
       end
 

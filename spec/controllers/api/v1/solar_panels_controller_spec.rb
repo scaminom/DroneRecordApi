@@ -17,7 +17,8 @@ RSpec.describe Api::V1::SolarPanelsController do
     it 'returns all solar panels' do
       solar_panels
       get :index, format: :json
-      expect(response.parsed_body.size).to eq(3)
+      json_response = response.parsed_body
+      expect(json_response['data']['solar_panels'].length).to eq(3)
     end
   end
 
@@ -40,7 +41,8 @@ RSpec.describe Api::V1::SolarPanelsController do
       allow(mock_query).to receive(:perform).and_return(SolarPanel.all)
 
       get :filter_data, params: { scope: { drone_id: 1 } }
-      expect(response.parsed_body.size).to eq(3)
+      json_response = response.parsed_body
+      expect(json_response['data']['solar_panels'].length).to eq(3)
     end
   end
 end

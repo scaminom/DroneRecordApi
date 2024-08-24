@@ -7,15 +7,17 @@ module Api
         filtering_query = FilteringsSearchQuery.new
         data = filtering_query.perform(SolarPanel, params)
 
-        render json: data
+        render_success_response(data: { solar_panels: data })
       end
 
       def index
         solar_panels = SolarPanel.all
 
-        render json: Panko::ArraySerializer.new(
+        response = Panko::ArraySerializer.new(
           solar_panels, each_serializer: SolarPanelSerializer
-        ).to_json
+        ).to_a
+
+        render_success_response(data: { solar_panels: response })
       end
 
       private

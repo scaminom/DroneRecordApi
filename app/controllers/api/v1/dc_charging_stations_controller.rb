@@ -7,15 +7,17 @@ module Api
         filtering_query = FilteringsSearchQuery.new
         data = filtering_query.perform(DcChargingStation, params)
 
-        render json: data
+        render_success_response(data: { dc_charging_stations: data })
       end
 
       def index
         dc_charging_stations = DcChargingStation.all
 
-        render json: Panko::ArraySerializer.new(
+        response = Panko::ArraySerializer.new(
           dc_charging_stations, each_serializer: DcChargeStationSerializer
-        ).to_json
+        ).to_a
+
+        render_success_response(data: { dc_charging_stations: response })
       end
 
       private

@@ -6,9 +6,13 @@ module Api
       def index
         users = User.all
 
-        render json: Panko::ArraySerializer.new(
-          users, each_serializer: UserSerializer
-        ).to_json
+        response = Panko::ArraySerializer.new(
+          users, each_serializer: UserSerializer, only: {
+            instance: %i[id first_name email]
+          }
+        ).to_a
+
+        render_success_response(data: { users: response })
       end
 
       private

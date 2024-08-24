@@ -17,7 +17,8 @@ RSpec.describe Api::V1::DcChargingStationsController do
     it 'returns all solar panels' do
       dc_charging_stations
       get :index, format: :json
-      expect(response.parsed_body.size).to eq(3)
+      json_response = response.parsed_body
+      expect(json_response['data']['dc_charging_stations'].length).to eq(3)
     end
   end
 
@@ -40,7 +41,8 @@ RSpec.describe Api::V1::DcChargingStationsController do
       allow(mock_query).to receive(:perform).and_return(DcChargingStation.all)
 
       get :filter_data, params: { scope: { drone_id: 1 } }
-      expect(response.parsed_body.size).to eq(3)
+      json_response = response.parsed_body
+      expect(json_response['data']['dc_charging_stations'].length).to eq(3)
     end
   end
 end
