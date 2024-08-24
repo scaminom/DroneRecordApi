@@ -16,7 +16,8 @@ RSpec.describe Api::V1::DronesController do
     it 'returns all drones' do
       create_list(:drone, 3)
       get :index, format: :json
-      expect(response.parsed_body.size).to eq(3)
+      json_response = response.parsed_body
+      expect(json_response['data']['drones'].length).to eq(3)
     end
   end
 
@@ -31,7 +32,7 @@ RSpec.describe Api::V1::DronesController do
     it 'returns the correct drone' do
       get :show, params: { id: drone.id }
       json_response = response.parsed_body
-      expect(json_response['id']).to eq(drone.id)
+      expect(json_response['data']['drone']['id']).to eq(drone.id)
     end
   end
 

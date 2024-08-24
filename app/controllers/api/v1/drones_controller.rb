@@ -7,38 +7,43 @@ module Api
       def index
         drones = Drone.all
 
-        render json: Panko::ArraySerializer.new(
+        response = Panko::ArraySerializer.new(
           drones, each_serializer: DroneSerializer
-        ).to_json
+        ).to_a
+
+        render_success_response(data: { drones: response })
       end
 
       def show
-        render json: DroneSerializer.new.serialize(@drone)
+        render_success_response(data: { drone: DroneSerializer.new.serialize(@drone) })
       end
 
       def create
         drone = Drone.new(drone_params)
 
         if drone.save
-          render json: drone, status: :created
+          render_success_response(data: { drone: }, status: :created)
         else
-          render json: { errors: drone.errors.full_messages }, status: :unprocessable_entity
+          render_error_response(drone.errors.full_messages, status:  :unprocessable_entity,
+                                                            message: 'drone could not be created')
         end
       end
 
       def update
         if @drone.update(drone_params)
-          render json: @drone
+          render_success_response(data: { drone: @drone }, status: :created)
         else
-          render json: { errors: @drone.errors.full_messages }, status: :unprocessable_entity
+          render_error_response(@drone.errors.full_messages, status:  :unprocessable_entity,
+                                                             message: 'drone could not be updated')
         end
       end
 
       def destroy
         if @drone.destroy
-          render json: { message: 'drone deleted successfully' }
+          render_success_response(message: 'drone deleted successfully')
         else
-          render json: { errors: @drone.errors.full_messages }, status: :unprocessable_entity
+          render_error_response(@drone.errors.full_messages, status:  404,
+                                                             message: 'drone could not be deleted')
         end
       end
 

@@ -16,7 +16,8 @@ RSpec.describe Api::V1::UsersController do
     it 'returns all users' do
       create_list(:user, 3)
       get :index, format: :json
-      expect(response.parsed_body.size).to eq(4)
+      json_response = response.parsed_body
+      expect(json_response['data']['users'].length).to eq(4)
     end
   end
 end

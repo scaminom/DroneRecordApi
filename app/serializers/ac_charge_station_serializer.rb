@@ -1,6 +1,6 @@
 class AcChargeStationSerializer < Panko::Serializer
   attributes :id,
-             :fecha_registro,
-             :corrienteAC,
-             :potenciaAC
+             :registration_date,
+             :ac_current,
+             :ac_power
 end
