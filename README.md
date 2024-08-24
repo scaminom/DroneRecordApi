@@ -1,7 +1,5 @@
 # Rails API Documentation
 
-This documentation provides a brief overview of the available routes and how to use them.
-
 ## Authentication
 
 ### User Authentication
@@ -14,68 +12,95 @@ This documentation provides a brief overview of the available routes and how to 
 
 All API endpoints are under the `/api/v1` namespace.
 
-### 1. Users
+## Available Scopes for Filtering  Records
 
-- **Index:** `GET /api/v1/users`  
-  - Retrieve a list of users.
+The `FilteringsSearchQuery` class supports the following scopes for filtering records that include **Filterable** module. These scopes can be applied as query parameters in your API requests.
 
-### 2. Drones
+### 1. Filter by `drone_id`
+- **Description:** Filters record by the `drone_id`.
+- **Parameter:** `by_id`
+- **Usage:**
+  ```http
+  GET /record?by_id=[drone_id]
+  ```
+- **Example:**
+  ```http
+  GET /record?by_id=1
+  ```
 
-- **Index:** `GET /api/v1/drones`
-- **Show:** `GET /api/v1/drones/:id`
-- **Create:** `POST /api/v1/drones`
-- **Update:** `PUT /api/v1/drones/:id`
-- **Destroy:** `DELETE /api/v1/drones/:id`
+### 2. Filter by Current Week
+- **Description:** Filters record registered during the current week.
+- **Parameter:** `by_week`
+- **Usage:**
+  ```http
+  GET /record?by_week=true
+  ```
+- **Example:**
+  ```http
+  GET /record?by_week=true
+  ```
 
-### 3. Solar Panels
+### 3. Filter by Current Month
+- **Description:** Filters record registered during the current month.
+- **Parameter:** `by_month`
+- **Usage:**
+  ```http
+  GET /record?by_month=true
+  ```
+- **Example:**
+  ```http
+  GET /record?by_month=true
+  ```
 
-- **Index:** `GET /api/v1/solar_panels`  
-  - Retrieve a list of solar panels.  
-  - **Supported Scopes:**
-    - `drone_id`: Filter by the associated drone ID.
-    - `by_week`: Filter by the current week.
-    - `by_month`: Filter by the current month.
-    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
-    - `by_current`: Retrieve the most recent 5 records.
-    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
+### 4. Filter by Specific Day
+- **Description:** Filters record registered on a specific day.
+- **Parameter:** `by_day[date]`
+- **Usage:**
+  ```http
+  GET /record?by_day[date]=[YYYY-MM-DD]
+  ```
+- **Example:**
+  ```http
+  GET /record?by_day[date]=2024-08-23
+  ```
 
-### 4. DC Charging Stations
+### 5. Filter by Most Recent
+- **Description:** Returns the 5 most recent record.
+- **Parameter:** `by_current`
+- **Usage:**
+  ```http
+  GET /record?by_current=true
+  ```
+- **Example:**
+  ```http
+  GET /record?by_current=true
+  ```
 
-- **Index:** `GET /api/v1/dc_charging_stations`  
-  - Retrieve a list of DC charging stations.  
-  - **Supported Scopes:**
-    - `drone_id`: Filter by the associated drone ID.
-    - `by_week`: Filter by the current week.
-    - `by_month`: Filter by the current month.
-    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
-    - `by_current`: Retrieve the most recent 5 records.
-    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
+### 6. Filter by Personalized Date Range
+- **Description:** Filters record within a specific date range.
+- **Parameters:** `by_personalized[start_date]`, `by_personalized[end_date]`
+- **Usage:**
+  ```http
+  GET /record?by_personalized[start_date]=[YYYY-MM-DD]&by_personalized[end_date]=[YYYY-MM-DD]
+  ```
+- **Example:**
+  ```http
+  GET /record?by_personalized[start_date]=2024-08-16&by_personalized[end_date]=2024-08-23
+  ```
 
-### 5. AC Charging Stations
+### 7. Combine Multiple Scopes
+- **Description:** Combine multiple scopes to refine your search further.
+- **Example:**
+  - Filter by `drone_id` and Current Week:
+    ```http
+    GET /record?by_id=1&by_week=true
+    ```
 
-- **Index:** `GET /api/v1/ac_charging_stations`  
-  - Retrieve a list of AC charging stations.  
-  - **Supported Scopes:**
-    - `drone_id`: Filter by the associated drone ID.
-    - `by_week`: Filter by the current week.
-    - `by_month`: Filter by the current month.
-    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
-    - `by_current`: Retrieve the most recent 5 records.
-    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
+### Error Handling
+- **Invalid Scope:**
+  - **Description:** If no valid scope is provided, the system will raise an `ArgumentError`.
+  - **Example:**
+    ```http
+    GET /ac_charging_stations?unknown_param=value
+    ```
 
-### 6. UAV Data (`DatosUAVs`)
-
-- **Index:** `GET /api/v1/datos_uavs`  
-  - Retrieve a list of UAV data.  
-  - **Supported Scopes:**
-    - `drone_id`: Filter by the associated drone ID.
-    - `by_week`: Filter by the current week.
-    - `by_month`: Filter by the current month.
-    - `by_day[date]=YYYY-MM-DD`: Filter by a specific day (you **must** pass a date).
-    - `by_current`: Retrieve the most recent 5 records.
-    - `by_personalized[start_date]=YYYY-MM-DD&by_personalized[end_date]=YYYY-MM-DD`: Filter by a custom date range.
-
-## Error Handling
-
-- **No Route Found:**  
-  - `ANY *unmatched` returns a `404 Not Found` error.
