@@ -49,6 +49,8 @@ class ApplicationController < ActionController::API
       'You are not authorized to perform this action.'
     when ActionDispatch::Http::Parameters::ParseError
       "Invalid JSON format: #{exception.message}."
+    else
+      exception.message
     end
   end
 

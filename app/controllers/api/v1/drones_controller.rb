@@ -5,7 +5,8 @@ module Api
       load_and_authorize_resource
 
       def index
-        drones = Drone.all
+        drones = Drone.includes(:user).all
+        # drones = Drone.all
 
         response = Panko::ArraySerializer.new(
           drones, each_serializer: DroneSerializer

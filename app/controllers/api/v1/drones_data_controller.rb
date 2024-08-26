@@ -3,6 +3,13 @@ module Api
     class DronesDataController < ApplicationController
       load_and_authorize_resource param_method: :drone_data_params, class: 'DroneData'
 
+      def filter_data
+        filtering_query = FilteringsSearchQuery.new
+        data = filtering_query.perform(DroneData, params)
+
+        render_success_response(data: { drones_data: data })
+      end
+
       def index
         data = DroneData.all
 

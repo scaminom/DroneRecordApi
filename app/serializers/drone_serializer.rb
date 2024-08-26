@@ -4,7 +4,7 @@ class DroneSerializer < Panko::Serializer
               :description,
               :serial_number,
               :drone_type,
-              :battery_capacit,
+              :battery_capacity,
               :board_type,
               :max_wind_speed,
               :user_name
