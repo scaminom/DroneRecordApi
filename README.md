@@ -1,18 +1,37 @@
-# Rails API Documentation
+# DroneRecordApi
+DroneRecordApi is an application developed in Ruby on Rails that provides an API for managing and querying drone-related records. 
+The API allows filtering and retrieving detailed information about drones, drone-related data, and AC and DC charging stations, using scopes for specific queries.
 
-## Authentication
+## Dependencies
 
-### User Authentication
+- Ruby 3.3.1
+- Rails 7.1.3
+- Postgres
 
-- **Login:** `POST /auth/login`
-- **Logout:** `DELETE /auth/logout`
-- **Signup:** `POST /auth/signup`
+## Local Development
 
-## API Endpoints
+1. Fork the project.
 
-All API endpoints are under the `/api/v1` namespace.
+   ```bash
+   $ git clone https://github.com/YOUR-USERNAME/DroneRecordApi.git
+   $ cd DroneRecordApi
+   $ git remote add upstream https://github.com/ORIGINAL-OWNER/DroneRecordApi.git
+   ```
+
+2. Make sure the tests succeed.
+
+   ```bash
+   $ bundle exec rspec
+   ```
+
+1. Start the development server.
+
+   ```bash
+   $ bin/rails s
+   ```
 
 ## Available Scopes for Filtering  Records
+All API endpoints are under the `/api/v1` namespace.
 
 The `FilteringsSearchQuery` class supports the following scopes for filtering records that include **Filterable** module. These scopes can be applied as query parameters in your API requests.
 
@@ -95,10 +114,6 @@ The `FilteringsSearchQuery` class supports the following scopes for filtering re
     ```http
     GET /record?by_id=1&by_week=true
     ```
-
-### Error Handling
-- **Invalid Scope:**
-  - **Description:** If no valid scope is provided, the system will raise an `ArgumentError`.
   - **Example:**
     ```http
     GET /ac_charging_stations?unknown_param=value
