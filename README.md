@@ -17,6 +17,10 @@ The API allows filtering and retrieving detailed information about drones, drone
    $ cd DroneRecordApi
    $ git remote add upstream https://github.com/ORIGINAL-OWNER/DroneRecordApi.git
    ```
+3. Setup the proyect.
+   ```bash
+   $ bin/setup
+   ```   
 
 2. Make sure the tests succeed.
 
