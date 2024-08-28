@@ -36,3 +36,5 @@
 
 # Ignore byebug command history file.
 .byebug_history
+
+/config/credentials/production.key

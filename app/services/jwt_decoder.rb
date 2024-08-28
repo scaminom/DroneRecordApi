@@ -4,7 +4,7 @@ class JwtDecoder
   end
 
   def decode
-    JWT.decode(@token, Rails.application.credentials.fetch(:secret_key_base)).first
+    JWT.decode(@token, Rails.application.credentials.devise[:jwt_secret_key]).first
   rescue JWT::DecodeError
     nil
   end
