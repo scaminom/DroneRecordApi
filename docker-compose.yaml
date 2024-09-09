@@ -1,12 +1,24 @@
 services:
+  drone-api-service:
+    container_name: drone-api
+    build: ./
+    restart: unless-stopped
+    ports:
+      - 80:3000
+    volumes:
+      - .:/rails/app
+    depends_on:
+      - db
   db:
     image: postgres:14.3
     restart: always
     ports:
-      - '5449:5432'
+      - "5449:5432"
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: DroneRecordDb
     container_name: DroneDb
     volumes:
       - postgres:/var/lib/postgresql/data
+volumes:
+  postgres:
